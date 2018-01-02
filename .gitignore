@@ -2,3 +2,4 @@ node_modules
 bower_components
 .env
 index.min.js
+package-lock.json
