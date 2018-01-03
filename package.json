@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "webpack": "NODE_ENV=prod && webpack -w",
-    "setup": "npm install && npm run webpack && npm start"
+    "setup": "npm install && npm run webpack && npm start",
+    "produce": "PORT=80 node index.js"
   },
   "repository": {
     "type": "git",
