@@ -6,14 +6,30 @@ export default class Friends extends Component {
     super();
     this.state = {
       FriendsList: [],
+      friendInput: '',
     };
+    this.handleInput = this.handleInput.bind(this);
+    this.addFriend = this.addFriend.bind(this);
   }
   componentWillMount() {
+    axios.get('/getFriends')
+      .then((data) => {
+        console.log(data);
+        this.setState({ FriendsList: data.friends });
+      });
+  }
+  handleInput(event) {
+    this.setState({ friendInput: event.target.value });
+  }
+  addFriend() {
+    console.log(this.state.friendInput);
+    axios.post('addFriend')
+      .then(data => console.log(data));
   }
 
   render() {
     const FriendsList = this.state.FriendsList.map((e, i) => (
-      <li key={e[0]} className="FriendsList" />
+      <li key={e[i]} className="FriendsList" />
     ));
     return (
       <div className="DashBoardThird">
@@ -22,9 +38,19 @@ export default class Friends extends Component {
         </div>
         <div className="AddFriends">
           <form>
-            Add a friend by entering their email here:
-            <input type="text" placeholder="example@gmail.com" /><span><br /></span>
-            <button className="btn btn-primary" type="submit" value="Submit">Add friend</button>
+            Add a friend by entering their email here:<br />
+            <input
+              type="text"
+              placeholder="example@gmail.com"
+              value={this.state.friendInput}
+              onChange={this.handleInput}
+            />
+            <button
+              onClick={this.addFriend}
+              className="btn btn-primary"
+              type="submit"
+              value="Submit"
+            >Add friend</button>
           </form>
         </div>
         <ul className="DashBoardList">
