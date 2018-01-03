@@ -27,7 +27,6 @@ export default class Signin extends Component {
     xhr.onload = () => {
       window.isLoggedIn = true;
       window.user = userEmail;
-      
       const pusher = new Pusher('c4b754fe17b65799b281', {
         cluster: 'us2',
       });
