@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Badges from './Badges';
 import Rankings from './Rankings';
+import Friends from './Friends';
 import CompetitionSelect from '../Competition/CompetitionSelect';
 
 const DashBoard = props => (
@@ -20,6 +21,7 @@ const DashBoard = props => (
           <div className="DashBoardFlex">
             <Badges />
             <Rankings />
+            <Friends user={props.user} />
           </div>
         </div>
       </Card>

@@ -42,7 +42,7 @@ export default class Rankings extends Component {
       </li>
     ));
     return (
-      <div className="DashBoardHalf">
+      <div className="DashBoardThird">
         <div className="ListTitle">
           <h1> Rankings </h1>
         </div>

@@ -3,28 +3,22 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 
-let db = false;
 mongoose.connect(mongoDB, {
   useMongoClient: true,
 }, (error) => {
   if (error) {
     console.error(error);
   } else {
-    db = true;
     console.log('connected to', mongoDB);
   }
 });
-setInterval(() => {
-  if (!db) {
-    console.log('NOT CONNECTED TO DB');
-  }
-}, 1000);
 
 const Schema = mongoose.Schema;
 
 const userSchema = Schema({
   username: String,
   email: String,
+  friends: String,
 });
 
 const challengeSchema = new Schema({
@@ -51,7 +45,6 @@ const Game = mongoose.model('Game', gameSchema);
 
 
 exports.makeChallenge = (req, res) => {
-  console.log('make cha called');
   Challenge.find({
     name: req.body.name,
   }).exec((notFound, found) => {
@@ -110,6 +103,7 @@ exports.findUser = (dataObject, cb) => {
         User.create({
           username: dataObject.email,
           email: dataObject.email,
+          friends: JSON.stringify([]),
         }, (err2, instance) => cb(instance));
       } else {
         cb(success);
@@ -163,4 +157,33 @@ exports.getGameWinners = (req, res) => {
       res.send(games);
     }
   });
+};
+
+exports.addFriend = (req, res) => {
+  const { userEmail, friend } = req.body;
+  User.findOne({ email: friend })
+    .then((newFriend) => {
+      const friendId = newFriend.username;
+      User.findOne({ email: userEmail })
+        .then((user) => {
+          const userFriends = JSON.parse(user.friends);
+          if(!userFriends.includes(newFriend)) {
+            userFriends.push(friendId);
+            user.friends = JSON.stringify(userFriends);
+            user.save();
+            res.status(201).send(user);
+          } else {
+            res.status(400).send('You\'re already friends with that person!');
+          }
+        })
+        .catch(error => res.status(404).send(error));
+    })
+    .catch(err => res.status(404).send(err));
+};
+
+exports.getFriends = (req, res) => {
+  const email = req.headers.user;
+  User.findOne({ email })
+    .then(user => res.status(200).send(user.friends))
+    .catch(err => res.status(404).send(err));
 };

@@ -14,7 +14,7 @@ export default class Badges extends Component {
       </li>
     ));
     return (
-      <div className="DashBoardHalf">
+      <div className="DashBoardThird">
         <div className="ListTitle">
           <h1> Badges </h1>
         </div>
