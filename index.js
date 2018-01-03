@@ -65,4 +65,4 @@ app.get('/findUserById', db.findUserById);
 app.post('/addFriend', db.addFriend);
 app.get('/getFriends', db.getFriends);
 app.post('/duel', db.createDuel);
-app.post('/duelUpdate', db.updateDuel);
+// app.post('/duelUpdate', db.updateDuel);
