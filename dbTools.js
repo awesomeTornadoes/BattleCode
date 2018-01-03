@@ -166,10 +166,14 @@ exports.addFriend = (req, res) => {
         .then((user) => {
           console.log('found user', user);
           const userFriends = JSON.parse(user.friends);
-          userFriends.push(friendId);
-          user.friends = JSON.stringify(userFriends);
-          user.save();
-          res.status(201).send(user);
+          if(!userFriends.includes(newFriend)) {
+            userFriends.push(friendId);
+            user.friends = JSON.stringify(userFriends);
+            user.save();
+            res.status(201).send(user);
+          } else {
+            res.status(400).send('You\'re already friends with that person!');
+          }
         })
         .catch(error => res.status(404).send(error));
     })
