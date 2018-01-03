@@ -12,10 +12,12 @@ export default class Friends extends Component {
     this.addFriend = this.addFriend.bind(this);
   }
   componentWillMount() {
-    axios.get('/getFriends')
-      .then((data) => {
-        console.log(data);
-        this.setState({ FriendsList: data.friends });
+    axios.get('/getFriends', { headers: { user: this.props.user } })
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.friends) {
+          this.setState({ FriendsList: JSON.parse(response.data.friends) });
+        }
       });
   }
   handleInput(event) {
@@ -29,9 +31,12 @@ export default class Friends extends Component {
   }
 
   render() {
-    const FriendsList = this.state.FriendsList.map((e, i) => (
-      <li key={e[i]} className="FriendsList" />
-    ));
+    let FriendsList;
+    if (this.state.FriendsList[0]) {
+      FriendsList = this.state.FriendsList.map((e, i) => (
+        <li key={e[i]} className="FriendsList" />
+      ));
+    }
     return (
       <div className="DashBoardThird">
         <div className="ListTitle">

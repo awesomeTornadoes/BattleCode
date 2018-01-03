@@ -54,3 +54,4 @@ app.post('/gamewin', db.gameWin);
 app.get('/games', db.getGameWinners);
 app.get('/findUserById', db.findUserById);
 app.post('/addFriend', db.addFriend);
+app.get('/getFriends', db.getFriends);

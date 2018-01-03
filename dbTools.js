@@ -160,11 +160,9 @@ exports.addFriend = (req, res) => {
   const { userEmail, friend } = req.body;
   User.findOne({ email: friend })
     .then((newFriend) => {
-      console.log('found friend', newFriend);
-      const friendId = newFriend._id;
+      const friendId = newFriend.username;
       User.findOne({ email: userEmail })
         .then((user) => {
-          console.log('found user', user);
           const userFriends = JSON.parse(user.friends);
           if(!userFriends.includes(newFriend)) {
             userFriends.push(friendId);
@@ -177,5 +175,12 @@ exports.addFriend = (req, res) => {
         })
         .catch(error => res.status(404).send(error));
     })
+    .catch(err => res.status(404).send(err));
+};
+
+exports.getFriends = (req, res) => {
+  const email = req.headers.user;
+  User.findOne({ email })
+    .then(user => res.status(200).send(user.friends))
     .catch(err => res.status(404).send(err));
 };
