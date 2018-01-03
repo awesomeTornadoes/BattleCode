@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 export default class Friends extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       FriendsList: [],
       friendInput: '',
@@ -22,8 +22,9 @@ export default class Friends extends Component {
     this.setState({ friendInput: event.target.value });
   }
   addFriend() {
-    console.log(this.state.friendInput);
-    axios.post('addFriend')
+    const friend = this.state.friendInput;
+    const userEmail = this.props.user;
+    axios.post('/addFriend', { friend, userEmail })
       .then(data => console.log(data));
   }
 

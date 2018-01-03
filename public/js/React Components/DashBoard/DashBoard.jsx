@@ -21,7 +21,7 @@ const DashBoard = props => (
           <div className="DashBoardFlex">
             <Badges />
             <Rankings />
-            <Friends />
+            <Friends user={props.user} />
           </div>
         </div>
       </Card>

@@ -157,5 +157,6 @@ exports.getGameWinners = (req, res) => {
 };
 
 exports.addFriend = (req, res) => {
-  console.log(req);
+  console.log(req.body);
+  res.send('hit add friend route');
 };
