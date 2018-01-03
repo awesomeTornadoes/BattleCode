@@ -19,7 +19,7 @@ export default class Signin extends Component {
     const idToken = googleUser.getAuthResponse().id_token;
     const profile = googleUser.getBasicProfile();
     const userEmail = profile.getEmail();
-    console.log({ accessToken: idToken, email: userEmail });
+    // console.log({ accessToken: idToken, email: userEmail });
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '/signin', true);
@@ -30,7 +30,6 @@ export default class Signin extends Component {
       const pusher = new Pusher('c4b754fe17b65799b281', {
         cluster: 'us2',
       });
-      console.log('pusher is done');
 
       const channel = pusher.subscribe(window.user);
 
