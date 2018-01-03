@@ -27,6 +27,17 @@ export default class Signin extends Component {
     xhr.onload = () => {
       window.isLoggedIn = true;
       window.user = userEmail;
+      
+      const pusher = new Pusher('c4b754fe17b65799b281', {
+        cluster: 'us2',
+      });
+      console.log('pusher is done');
+
+      const channel = pusher.subscribe(window.user);
+
+      channel.bind('duel-event', (data) => {
+        alert('An event was triggered with message: ' + data.message);
+      });
       this.setState({
         userLoginLoaded: true,
         user: userEmail,
