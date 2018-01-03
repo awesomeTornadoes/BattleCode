@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardText } from 'material-ui';
 import axios from 'axios';
+
 const prettyMs = require('pretty-ms');
 const moment = require('moment');
 
@@ -28,6 +29,7 @@ export default class Test extends Component {
       eval(`${this.props.test};`);
     }
   }
+
   componentDidUpdate() {
     this.mocha.innerHTML = '';
     try {
@@ -53,6 +55,13 @@ export default class Test extends Component {
     } catch (e) {
       eval(`${this.props.test};`);
     }
+  }
+
+  componentWillUnmount() {
+    // This method is called immediately before the component is removed
+    // from the page and destroyed. We can clear the interval here:
+
+    clearInterval(this.timer);
   }
 
   tick() {
