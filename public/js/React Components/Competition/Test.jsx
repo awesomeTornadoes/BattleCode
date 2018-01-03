@@ -18,6 +18,10 @@ export default class Test extends Component {
       mocha.suite.suites.splice(0, 1);
       eval(`${this.props.userInput}; ${this.props.test};`);
 
+      // check and see if the test passed with mocha
+      // post the object to db
+      // update the props to true
+
       setTimeout(() => {
         if (mocha.suite.suites[0].tests.every(test => test.state === 'passed')) {
           document.getElementsByClassName('Confetti')[0].style.display = 'block';

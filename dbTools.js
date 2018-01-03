@@ -35,10 +35,12 @@ const challengeSchema = new Schema({
 
 const gameSchema = new Schema({
   winner: {
-    type: String, ref: 'User',
+    type: String,
+    ref: 'User',
   },
   challenge: {
-    type: String, ref: 'Challenge',
+    type: String,
+    ref: 'Challenge',
   },
 });
 
@@ -49,7 +51,7 @@ const Game = mongoose.model('Game', gameSchema);
 
 
 exports.makeChallenge = (req, res) => {
-  console.log('make cha called')
+  console.log('make cha called');
   Challenge.find({
     name: req.body.name,
   }).exec((notFound, found) => {
@@ -113,8 +115,7 @@ exports.findUser = (dataObject, cb) => {
         cb(success);
       }
     }
-  },
-  );
+  });
 };
 
 exports.findUserById = (req, res) => {
@@ -128,7 +129,9 @@ exports.findUserById = (req, res) => {
 };
 
 exports.gameWin = (req, res) => {
-  User.findOne({ email: req.body.email }).exec((foundError, suc) => {
+  User.findOne({
+    email: req.body.email,
+  }).exec((foundError, suc) => {
     if (foundError) {
       res.send(foundError);
     } else {
