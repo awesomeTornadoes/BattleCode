@@ -157,6 +157,21 @@ exports.getGameWinners = (req, res) => {
 };
 
 exports.addFriend = (req, res) => {
-  console.log(req.body);
-  res.send('hit add friend route');
+  const { userEmail, friend } = req.body;
+  User.findOne({ email: friend })
+    .then((newFriend) => {
+      console.log('found friend', newFriend);
+      const friendId = newFriend._id;
+      User.findOne({ email: userEmail })
+        .then((user) => {
+          console.log('found user', user);
+          const userFriends = JSON.parse(user.friends);
+          userFriends.push(friendId);
+          user.friends = JSON.stringify(userFriends);
+          user.save();
+          res.status(201).send(user);
+        })
+        .catch(error => res.status(404).send(error));
+    })
+    .catch(err => res.status(404).send(err));
 };
