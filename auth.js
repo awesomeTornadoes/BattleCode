@@ -9,11 +9,8 @@ exports.tokenCheck = (token, cb) => {
     CLIENT_ID,
     (e, login) => {
       const payload = login.getPayload();
-      const userid = payload.sub;
+      // const userid = payload.sub;
       cb({
         email: payload.email,
       });
-    },
-  );
-};
-
+    })};

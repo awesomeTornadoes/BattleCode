@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "webpack": "NODE_ENV=prod && webpack -w",
+    "webpack1": "webpack-dev-server --open",
     "setup": "npm install && npm run webpack && npm start"
   },
   "repository": {
@@ -49,6 +50,7 @@
     "material-ui": "^0.18.7",
     "mocha": "^3.5.0",
     "mongoose": "^4.11.5",
+    "pretty-ms": "^3.1.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-addons-test-utils": "^15.6.0",
