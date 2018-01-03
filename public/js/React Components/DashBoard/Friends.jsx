@@ -14,9 +14,10 @@ export default class Friends extends Component {
   componentWillMount() {
     axios.get('/getFriends', { headers: { user: this.props.user } })
       .then((response) => {
-        console.log(response.data);
-        if (response.data.friends) {
-          this.setState({ FriendsList: JSON.parse(response.data.friends) });
+        console.log('friends list response', response.data);
+        if (response.data) {
+          const FriendsList = [response.data];
+          this.setState({ FriendsList });
         }
       });
   }
@@ -33,9 +34,14 @@ export default class Friends extends Component {
   render() {
     let FriendsList;
     if (this.state.FriendsList[0]) {
-      FriendsList = this.state.FriendsList.map((e, i) => (
-        <li key={e[i]} className="FriendsList" />
-      ));
+      FriendsList = this.state.FriendsList.map((e, i) => {
+        console.log(e);
+        return (
+          <li key={e[i]} className="FriendsList">
+            <p>{e}</p>
+          </li>
+        );
+      });
     }
     return (
       <div className="DashBoardThird">
