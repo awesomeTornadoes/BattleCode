@@ -36,6 +36,9 @@ const gameSchema = new Schema({
     type: String,
     ref: 'Challenge',
   },
+  time: {
+    type: Number,
+  },
 });
 
 
@@ -139,6 +142,7 @@ exports.gameWin = (req, res) => {
           Game.create({
             winner: suc._id,
             challenge: req.body.gameId,
+            time: req.body.time,
           }, (err2, instance) => {
             err2 ? console.error(err) : console.log('saved', instance);
           });

@@ -43,7 +43,8 @@ export default class Test extends Component {
           clearInterval(this.timer);
           document.getElementsByClassName('Confetti')[0].style.display = 'block';
           if (this.props.passed === false) {
-            axios.post('/gamewin', { email: this.props.user, gameId: this.props.testId }).then((res) => {
+            axios.post('/gamewin', { email: this.props.user, gameId: this.props.testId, time: this.state.timing }).then((res) => {
+              console.log({ email: this.props.user, gameId: this.props.testId, time: this.state.timing });
               console.log(res);
             });
             this.props.update();
