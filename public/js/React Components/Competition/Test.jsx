@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { Card, CardText } from 'material-ui';
 import axios from 'axios';
 const prettyMs = require('pretty-ms');
+const moment = require('moment');
 
 export default class Test extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      start: 0,
       elapsed: 0,
       timing: 0,
     };
@@ -16,7 +18,8 @@ export default class Test extends Component {
 
 
   componentDidMount() {
-    this.timer = setInterval(this.tick, 2000);
+    this.timer = setInterval(this.tick, 500);
+    this.setState({ start: Date.now() });
 
     try {
       mocha.suite.suites.splice(0, 1);
@@ -32,7 +35,6 @@ export default class Test extends Component {
       eval(`${this.props.userInput}; ${this.props.test};`);
 
       setTimeout(() => {
-        console.log(this.state);
         if (mocha.suite.suites[0].tests.every(test => test.state === 'passed')) {
           // The timer stops when all test pass
           this.setState({ timing: this.state.elapsed });
@@ -47,7 +49,7 @@ export default class Test extends Component {
         } else {
           console.log('fail!', 0);
         }
-      }, 400);
+      }, 20);
     } catch (e) {
       eval(`${this.props.test};`);
     }
@@ -56,18 +58,18 @@ export default class Test extends Component {
   tick() {
     // This function is called every 50 ms. It updates the
     // elapsed counter. Calling setState causes the component to be re-rendered
-    this.setState({ elapsed: new Date() - this.props.start });
+    this.setState({ elapsed: new Date() - this.state.start });
   }
 
   render() {
     const pretty = prettyMs(this.state.elapsed, { verbose: true });
-    const time = prettyMs(this.state.timing);
+    const start = moment(this.state.start).format('lll');
 
 
     return (
       <div>
         <h2>Your time is {pretty }</h2>
-        <h2>Your timing is {time }</h2>
+        <h2>Your timing is {start }</h2>
         <Card>
           <CardText>
             <div id="mocha" ref={(mocha) => { this.mocha = mocha; }} style={{ margin: 0 }} />

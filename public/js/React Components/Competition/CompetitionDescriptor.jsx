@@ -50,7 +50,6 @@ class CompetitionDescriptor extends Component {
           userInput={userInput}
           user={user}
           testId={testId}
-          start={Date.now()}
         />
       </div>
     );
