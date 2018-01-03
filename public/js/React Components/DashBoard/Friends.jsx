@@ -10,11 +10,11 @@ export default class Friends extends Component {
     };
     this.handleInput = this.handleInput.bind(this);
     this.addFriend = this.addFriend.bind(this);
+    this.sendChallenge = this.sendChallenge.bind(this);
   }
   componentWillMount() {
     axios.get('/getFriends', { headers: { user: this.props.user } })
       .then((response) => {
-        console.log('friends list response', response.data);
         if (response.data) {
           const FriendsList = [response.data];
           this.setState({ FriendsList });
@@ -28,20 +28,38 @@ export default class Friends extends Component {
     const friend = this.state.friendInput;
     const userEmail = this.props.user;
     axios.post('/addFriend', { friend, userEmail })
-      .then(data => console.log(data));
+      .then(() => {
+        axios.get('/getFriends', { headers: { user: userEmail } })
+          .then((response) => {
+            if (response.data) {
+              const FriendsList = [response.data];
+              this.setState({ FriendsList });
+            }
+          });
+      });
   }
-
+  sendChallenge(event) {
+    console.log(event.target.value);
+    const challenger = this.props.user;
+    axios.post('/duel', {
+      challenger,
+      challenged: event.target.value,
+    })
+      .then(duel => console.log(duel));
+  }
   render() {
     let FriendsList;
     if (this.state.FriendsList[0]) {
-      FriendsList = this.state.FriendsList.map((e, i) => {
-        console.log(e);
-        return (
-          <li key={e[i]} className="FriendsList">
-            <p>{e}</p>
-          </li>
-        );
-      });
+      FriendsList = this.state.FriendsList.map((e, i) => (
+        <li key={e[i]} className="FriendsList">
+          <p>{e}</p>
+          <button
+            value={e}
+            onClick={this.sendChallenge}
+            className="btn btn-primary"
+          >Challenge {e}!</button>
+        </li>
+      ));
     }
     return (
       <div className="DashBoardThird">

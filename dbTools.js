@@ -1,5 +1,6 @@
 const mongoDB = 'mongodb://preston:password@ds237947.mlab.com:37947/battlecode';
 const mongoose = require('mongoose');
+const Pusher = require('pusher');
 
 require('dotenv').config();
 
@@ -11,6 +12,14 @@ mongoose.connect(mongoDB, {
   } else {
     console.log('connected to', mongoDB);
   }
+});
+
+const pusher = new Pusher({
+  appId: '452960',
+  key: 'c4b754fe17b65799b281',
+  secret: '24c88ff32ea02f8c0fe8',
+  cluster: 'us2',
+  encrypted: true,
 });
 
 const Schema = mongoose.Schema;
@@ -36,11 +45,19 @@ const gameSchema = new Schema({
   },
 });
 
+const duelSchema = new Schema({
+  challenger: String,
+  challenged: String,
+  challenge: String,
+  challengerTime: Number,
+  challengedTime: Number,
+  winner: String,
+});
 
 const Challenge = mongoose.model('Challenge', challengeSchema);
 const User = mongoose.model('User', userSchema);
 const Game = mongoose.model('Game', gameSchema);
-
+const Duel = mongoose.model('Duel', duelSchema);
 
 exports.makeChallenge = (req, res) => {
   Challenge.find({
@@ -184,3 +201,24 @@ exports.getFriends = (req, res) => {
     .then(user => res.status(200).send(user.friends))
     .catch(err => res.status(404).send(err));
 };
+
+exports.createDuel = (req, res) => {
+  Challenge.find({})
+    .then((challenges) => {
+      console.log('Found challenges ', challenges);
+      const challenge = challenges[Math.floor(Math.random() * challenges.length)]._id;
+      console.log('challenge is ', challenge);
+      const { challenger, challenged } = req.body;
+      const duel = new Duel({ challenger, challenged, challenge });
+      duel.save()
+        .then(() => {
+          pusher.trigger(challenged, 'duel-event', { message: `You've been challenged by ${challenger}` });
+          res.status(201).send(duel);
+        })
+        .catch(err => res.status(500).send(err));
+    });
+};
+
+// exports.updateDuel = (req, res) => {
+//   const { challenge, challenger, challenged } = req.body;
+// };
