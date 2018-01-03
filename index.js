@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const db = require('./dbTools');
 const auth = require('./auth');
+const Pusher = require('pusher');
 
 const app = express();
 
@@ -13,6 +14,14 @@ app.use(bodyParser.urlencoded({
   extended: true,
 }));
 app.use(bodyParser.json());
+
+const pusher = new Pusher({
+  appId: '452960',
+  key: 'c4b754fe17b65799b281',
+  secret: '24c88ff32ea02f8c0fe8',
+  cluster: 'us2',
+  encrypted: true,
+});
 
 const port = process.env.PORT || 5000;
 app.set('port', port);
@@ -56,3 +65,5 @@ app.get('/games', db.getGameWinners);
 app.get('/findUserById', db.findUserById);
 app.post('/addFriend', db.addFriend);
 app.get('/getFriends', db.getFriends);
+app.post('/duel', db.createDuel);
+// app.post('/duelUpdate', db.updateDuel);
