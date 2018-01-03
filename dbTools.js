@@ -3,28 +3,22 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 
-let db = false;
 mongoose.connect(mongoDB, {
   useMongoClient: true,
 }, (error) => {
   if (error) {
     console.error(error);
   } else {
-    db = true;
     console.log('connected to', mongoDB);
   }
 });
-setInterval(() => {
-  if (!db) {
-    console.log('NOT CONNECTED TO DB');
-  }
-}, 1000);
 
 const Schema = mongoose.Schema;
 
 const userSchema = Schema({
   username: String,
   email: String,
+  friends: String,
 });
 
 const challengeSchema = new Schema({
@@ -49,7 +43,6 @@ const Game = mongoose.model('Game', gameSchema);
 
 
 exports.makeChallenge = (req, res) => {
-  console.log('make cha called')
   Challenge.find({
     name: req.body.name,
   }).exec((notFound, found) => {
@@ -108,6 +101,7 @@ exports.findUser = (dataObject, cb) => {
         User.create({
           username: dataObject.email,
           email: dataObject.email,
+          friends: JSON.stringify([]),
         }, (err2, instance) => cb(instance));
       } else {
         cb(success);
@@ -160,4 +154,8 @@ exports.getGameWinners = (req, res) => {
       res.send(games);
     }
   });
+};
+
+exports.addFriend = (req, res) => {
+  console.log(req);
 };
