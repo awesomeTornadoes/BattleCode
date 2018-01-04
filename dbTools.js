@@ -260,10 +260,12 @@ exports.updateDuel = (req, res) => {
   console.log(req.body);
   Duel.findOne({ _id: duelId })
     .then((duel) => {
-      console.log('found duel', duel);
+      console.log('email', email);
+      console.log('found duel', duel.challenged);
+      console.log('bool', email === duel.challenged);
       if (email === duel.challenger) {
         duel.challengerTime = time;
-      } else {
+      } else if (email === duel.challenged) {
         duel.challengedTime = time;
       }
       if (duel.challengerTime && duel.challengedTime) {
