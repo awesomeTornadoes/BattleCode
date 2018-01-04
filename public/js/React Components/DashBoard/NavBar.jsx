@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import { AppBar, LeftNav, MenuItem, LeftDrawer } from 'material-ui';
+import {
+  AppBar,
+  MenuItem,
+  IconMenu,
+  IconButton,
+  MoreVertIcon,
+  FlatButton,
+  Toggle,
+  NavigationClose,
+  Drawer,
+} from 'material-ui';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -23,16 +33,37 @@ export default class NavBar extends Component {
   handleToggle() {
     this.setState({ open: !this.state.open });
   }
+  toggleDrawer() {
+    this.setState({ open: !this.state.open })
+  }
   render() {
     // const menuItems = this.state.duels.map((duel) => {
     //   return { text: duel.challenger };
     // });
     return (
-      <AppBar
-        title="Dashboard"
-        style={{ backgroundColor: '#4FB5DB' }}
-        onLeftIconButtonTouchTap={this.handleToggle}
-      />
+      <div>
+        <AppBar
+          onLeftIconButtonTouchTap={() => this.toggleDrawer()}
+          title="Battle Code"
+          style={{ backgroundColor: '#4FB5DB' }}
+        />
+        <Drawer
+          docked={false}
+          onRequestChange={(open) => this.setState({ open })}
+          open={this.state.open}
+        >
+          <MenuItem
+            containerElement={<Link to="/login" />}
+            onTouchTap={() => { this.toggleDrawer(); }}
+            primaryText="Home"
+          />
+          <MenuItem
+            containerElement={<Link to="/login" />}
+            onTouchTap={() => { this.toggleDrawer(); }}
+            primaryText="Some Component"
+          />
+        </Drawer>
+      </div>
     );
   }
 }
