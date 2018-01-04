@@ -219,6 +219,13 @@ exports.createDuel = (req, res) => {
     });
 };
 
+exports.getDuels = (req, res) => {
+  const { user } = req.headers;
+  Duel.find({ challenged: user })
+    .then(duel => res.status(200).send(duel))
+    .catch(err => res.status(404).send(err));
+};
+
 // exports.updateDuel = (req, res) => {
 //   const { challenge, challenger, challenged } = req.body;
 // };

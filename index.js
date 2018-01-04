@@ -64,5 +64,6 @@ app.get('/games', db.getGameWinners);
 app.get('/findUserById', db.findUserById);
 app.post('/addFriend', db.addFriend);
 app.get('/getFriends', db.getFriends);
+app.get('/duels', db.getDuels);
 app.post('/duel', db.createDuel);
 // app.post('/duelUpdate', db.updateDuel);
