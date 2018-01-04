@@ -25,7 +25,6 @@ export default class NavBar extends Component {
   componentWillMount() {
     axios.get('/duels', { headers: { user: this.props.user } })
       .then((response) => {
-        console.log(response);
         this.setState({ duels: response.data });
       })
       .catch(err => console.error(err));
@@ -34,12 +33,16 @@ export default class NavBar extends Component {
     this.setState({ open: !this.state.open });
   }
   toggleDrawer() {
-    this.setState({ open: !this.state.open })
+    this.setState({ open: !this.state.open });
   }
   render() {
-    // const menuItems = this.state.duels.map((duel) => {
-    //   return { text: duel.challenger };
-    // });
+    const menuItems = this.state.duels.map((duel) => (
+      <MenuItem
+        key={duel}
+        containerElement={<Link to={`/competition?id=${duel.challenge}`} />}
+        primaryText={duel.challenger}
+      />
+    ));
     return (
       <div>
         <AppBar
@@ -52,28 +55,9 @@ export default class NavBar extends Component {
           onRequestChange={(open) => this.setState({ open })}
           open={this.state.open}
         >
-          <MenuItem
-            containerElement={<Link to="/login" />}
-            onTouchTap={() => { this.toggleDrawer(); }}
-            primaryText="Home"
-          />
-          <MenuItem
-            containerElement={<Link to="/login" />}
-            onTouchTap={() => { this.toggleDrawer(); }}
-            primaryText="Some Component"
-          />
+          {menuItems}
         </Drawer>
       </div>
     );
   }
 }
-
-// const Competitions = this.state.Competitions.map(comp => (
-//   <Link
-//     to={`/competition?id=${comp._id}`}
-//     key={comp._id}
-//     className="CompetitionItem"
-//   >
-//     <MenuItem primaryText={comp.name} />
-//   </Link>
-// ));
