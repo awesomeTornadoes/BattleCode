@@ -6,7 +6,8 @@ const path = require('path');
 const db = require('./dbTools');
 const auth = require('./auth');
 const Pusher = require('pusher');
-
+const config = require('./config');
+const {notifyOnChallenge} = require('./middleware/twilioNotifications');
 const app = express();
 
 app.use(express.static(path.join(__dirname, '/public')));
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({
   extended: true,
 }));
 app.use(bodyParser.json());
+
 
 const pusher = new Pusher({
   appId: '452960',
@@ -35,11 +37,12 @@ const server = app.listen(port, (err) => {
 // let users = 0;
 // const io = require('socket.io')(server);
 const io = require('socket.io')(server);
+
 io.on('connection', (socket) => {
   console.log('connected');
-  socket.on('room', function(data) {
-    console.log('in joining room in SERVER', data)
-    let room = 'alpha';
+  socket.on('room', (data) => {
+    console.log('in joining room in SERVER', data);
+    const room = 'alpha';
     // socket.join(room)
     socket.emit('new user join', ['user']);
     // setTimeout(() => {
@@ -55,13 +58,24 @@ app.post('/signin', (req, res) => {
     });
   });
 });
+
+app.post('/text', (req, res) => {
+  const { user } = req.body;
+  notifyOnChallenge(user);
+  res.send(user);
+});
+
+
+
 app.get('/competitions', db.getChallenges);
 app.get('/competition', db.getChallengeById);
 app.post('/uniquecompetition', db.returnOneChallenge);
 app.post('/makechallenge', db.makeChallenge);
 app.post('/gamewin', db.gameWin);
 app.get('/games', db.getGameWinners);
+app.get('/usergames', db.getUserGame);
 app.get('/findUserById', db.findUserById);
+app.get('/findUserByEmail', db.findUserByEmail);
 app.post('/addFriend', db.addFriend);
 app.get('/getFriends', db.getFriends);
 app.get('/duels', db.getDuels);

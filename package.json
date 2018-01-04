@@ -4,7 +4,7 @@
   "description": "> BattleCode is a website where you compete against your friends in an epic code battle! ## This app brings the excitement of live competition to coding. > Have you been lacking in your code skills lately. Fear no more, for BattleCode is here to alleviate your pain. ## \"My life has been changed by BattleCode...it's all I do!\" ## Head on down to https://www.battlecode.com to get started! ## \"Battlecode is the most fun I've had in my 70 years of teaching.\" ## If you want to be the best coder come join today!",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "webpack": "NODE_ENV=prod && webpack -w",
     "setup": "npm install && npm run webpack && npm start",
     "produce": "PORT=80 node index.js"
@@ -43,13 +43,18 @@
     "body-parser": "^1.17.2",
     "chai": "^4.1.0",
     "codemirror": "^5.28.0",
+    "dns": "^0.2.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "file-loader": "^0.11.2",
+    "fs": "0.0.1-security",
     "google-auth-library": "^0.10.0",
     "material-ui": "^0.18.7",
     "mocha": "^3.5.0",
+    "moment": "^2.20.1",
     "mongoose": "^4.11.5",
+    "net": "^1.0.2",
+    "pretty-ms": "^3.1.0",
     "prop-types": "^15.5.10",
     "pusher": "^1.5.1",
     "react": "^15.6.1",
@@ -62,6 +67,8 @@
     "react-router-dom": "^4.1.2",
     "react-tap-event-plugin": "^2.0.1",
     "socket.io": "^2.0.3",
-    "socket.io-client": "^2.0.3"
+    "socket.io-client": "^2.0.3",
+    "tls": "0.0.1",
+    "twilio": "^3.11.0"
   }
 }
