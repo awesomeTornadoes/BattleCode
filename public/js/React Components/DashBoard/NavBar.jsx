@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import {
   AppBar,
   MenuItem,
-  IconMenu,
-  IconButton,
-  MoreVertIcon,
-  FlatButton,
-  Toggle,
-  NavigationClose,
   Drawer,
 } from 'material-ui';
 import { Link } from 'react-router-dom';
@@ -52,7 +46,7 @@ export default class NavBar extends Component {
         />
         <Drawer
           docked={false}
-          onRequestChange={(open) => this.setState({ open })}
+          onRequestChange={open => this.setState({ open })}
           open={this.state.open}
         >
           {menuItems}
