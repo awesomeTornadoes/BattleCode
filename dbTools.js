@@ -257,7 +257,6 @@ exports.updateDuel = (req, res) => {
     email,
     time,
   } = req.body;
-  console.log(req.body);
   Duel.findOne({ _id: duelId })
     .then((duel) => {
       if (email === duel.challenger) {
@@ -268,7 +267,6 @@ exports.updateDuel = (req, res) => {
       }
       if (duel.challengerTime && duel.challengedTime) {
         duel.winner = duel.challengerTime < duel.challengedTime ? duel.challenger : duel.challenged;
-        console.log(duel.winner);
         duel.complete = true;
         // pusher.trigger(challenged, 'duel-complete', { message: `Your challenge with ${challenger} is complete! The winner is ${duel.winner}` });
         // pusher.trigger(challenger, 'duel-complete', { message: `Your challenge with ${challenged} is complete! The winner is ${duel.winner}` });
@@ -279,4 +277,9 @@ exports.updateDuel = (req, res) => {
     .catch(err => res.status(500).send(err));
 };
 
-// { email: this.props.user, gameId: this.props.testId, time: this.state.timing, duelId })
+exports.getUserWins = (req, res) => {
+  const { user } = req.headers;
+  Duel.find({ winner: user })
+    .then(duels => res.status(200).send(duels))
+    .catch(err => res.status(404).send(err));
+};

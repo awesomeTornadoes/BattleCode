@@ -7,6 +7,7 @@ export default class Friends extends Component {
     super(props);
     this.state = {
       FriendsList: [],
+      wins: [],
       friendInput: '',
     };
     this.handleInput = this.handleInput.bind(this);

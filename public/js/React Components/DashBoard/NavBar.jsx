@@ -3,7 +3,11 @@ import {
   AppBar,
   MenuItem,
   Drawer,
+  Badge,
+  FlatButton,
 } from 'material-ui';
+import MenuIcon from 'material-ui-icons/Menu';
+import { notification } from 'material-ui/svg-icons';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -27,6 +31,11 @@ export default class NavBar extends Component {
     this.setState({ open: !this.state.open });
   }
   toggleDrawer() {
+    axios.get('/duels', { headers: { user: this.props.user } })
+      .then((response) => {
+        this.setState({ duels: response.data });
+      })
+      .catch(err => console.error(err));
     this.setState({ open: !this.state.open });
   }
   render() {
@@ -43,12 +52,14 @@ export default class NavBar extends Component {
           onLeftIconButtonTouchTap={() => this.toggleDrawer()}
           title="Battle Code"
           style={{ backgroundColor: '#4FB5DB' }}
+          iconElementLeft={<Badge badgeContent={menuItems.length}><MenuIcon style={{ color: 'white', cursor: 'pointer' }} /></Badge>}
         />
         <Drawer
           docked={false}
           onRequestChange={open => this.setState({ open })}
           open={this.state.open}
         >
+          Your open challenges:
           {menuItems}
         </Drawer>
       </div>

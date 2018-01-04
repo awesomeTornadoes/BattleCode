@@ -79,3 +79,4 @@ app.get('/getFriends', db.getFriends);
 app.get('/duels', db.getDuels);
 app.post('/duel', db.createDuel);
 app.post('/duelUpdate', db.updateDuel);
+app.get('/userwins', db.getUserWins);
