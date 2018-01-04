@@ -65,6 +65,7 @@ export default class Friends extends Component {
             onClick={this.sendChallenge}
             className="btn btn-primary"
           >Challenge {e}!</button>
+          </br>
           <button
             value={e}
             onClick={this.sendText}
