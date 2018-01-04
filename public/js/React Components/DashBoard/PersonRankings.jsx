@@ -69,17 +69,17 @@ export default class PersonRankings extends Component {
     ));
     const userWins = [];
     for (let i = 0; i < this.state.wins.length; i += 2) {
-      userWins.push(<li>{this.state.wins[i + 1]} wins against {this.state.wins[i]}</li>);
+      userWins.push(<li key={this.state.wins[i]} >{this.state.wins[i + 1]} wins against {this.state.wins[i]}</li>);
     }
     return (
       <div className="DashBoardThird">
         <div className="ListTitle">
-          <h1> Personal Challenges timing </h1>
+          <h1> Your Challenges </h1>
         </div>
         <ul className="DashBoardList">
           {RankingsList}
         </ul>
-        <h4> Your wins </h4>
+        <h4> Duel wins: </h4>
         <ul className="DashBoardList">
           {userWins[0] ? userWins : 'Looks like you haven\'t won any challenges yet. Challenge someone!'}
         </ul>

@@ -27,6 +27,11 @@ export default class NavBar extends Component {
     this.setState({ open: !this.state.open });
   }
   toggleDrawer() {
+    axios.get('/duels', { headers: { user: this.props.user } })
+      .then((response) => {
+        this.setState({ duels: response.data });
+      })
+      .catch(err => console.error(err));
     this.setState({ open: !this.state.open });
   }
   render() {
