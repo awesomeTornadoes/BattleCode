@@ -1,12 +1,18 @@
 import React from 'react';
 import { AppBar, Card, MuiThemeProvider, RaisedButton } from 'material-ui';
 import { Link } from 'react-router-dom';
+import Avatar from 'material-ui/Avatar';
 import PropTypes from 'prop-types';
-import Badges from './Badges';
+import {
+  purple500,
+  white,
+} from 'material-ui/styles/colors';
+import PersonInfo from './PersonInfo';
 import Rankings from './Rankings';
 import PersonRankings from './PersonRankings';
 import Friends from './Friends';
 import CompetitionSelect from '../Competition/CompetitionSelect';
+
 
 const DashBoard = props => (
   <MuiThemeProvider >
@@ -18,9 +24,18 @@ const DashBoard = props => (
           <Link to="CreateCompetition">
             <RaisedButton fullWidth label="Create A Challenge" />
           </Link>
-          <div style={{ textAlign: 'center' }}>Welcome {props.user.slice(0, props.user.indexOf('@'))}!</div>
+          <div style={{ textAlign: 'center' }}>
+            <h1>Welcome {props.user.slice(0, props.user.indexOf('@'))}!</h1>
+            <Avatar
+              color={white}
+              backgroundColor={purple500}
+              size={30}
+            >
+              {window.user.slice(0, 1).toUpperCase()}
+            </Avatar>
+          </div>
           <div className="DashBoardFlex">
-            <Badges />
+            <PersonInfo />
             <Rankings />
             <PersonRankings />
             <Friends user={props.user} />
