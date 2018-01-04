@@ -45,6 +45,7 @@ export default class Signin extends Component {
         userLoginLoaded: true,
         user: userEmail,
       });
+      window.location.hash = '/dash';
     };
     xhr.send(`idtoken=${idToken}`);
   }
