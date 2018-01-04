@@ -260,19 +260,18 @@ exports.updateDuel = (req, res) => {
   console.log(req.body);
   Duel.findOne({ _id: duelId })
     .then((duel) => {
-      console.log('email', email);
-      console.log('found duel', duel.challenged);
-      console.log('bool', email === duel.challenged);
       if (email === duel.challenger) {
         duel.challengerTime = time;
-      } else if (email === duel.challenged) {
+      }
+      if (email === duel.challenged) {
         duel.challengedTime = time;
       }
       if (duel.challengerTime && duel.challengedTime) {
         duel.winner = duel.challengerTime < duel.challengedTime ? duel.challenger : duel.challenged;
+        console.log(duel.winner);
         duel.complete = true;
-        pusher.trigger(challenged, 'duel-complete', { message: `Your challenge with ${challenger} is complete! The winner is ${duel.winner}` });
-        pusher.trigger(challenger, 'duel-complete', { message: `Your challenge with ${challenged} is complete! The winner is ${duel.winner}` });
+        // pusher.trigger(challenged, 'duel-complete', { message: `Your challenge with ${challenger} is complete! The winner is ${duel.winner}` });
+        // pusher.trigger(challenger, 'duel-complete', { message: `Your challenge with ${challenged} is complete! The winner is ${duel.winner}` });
       }
       duel.save();
       res.status(204).send(duel);
