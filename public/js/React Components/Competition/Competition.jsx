@@ -25,7 +25,7 @@ export default class Competition extends Component {
 
     axios.post('/uniquecompetition', {
       id: window.location.hash.split('?id=')[1],
-    }).then(res => {
+    }).then((res) => {
       this.setState({
         test: parseToMocha(res.data[0].tests, res.data[0].name),
         name: res.data[0].name,
@@ -55,7 +55,7 @@ export default class Competition extends Component {
               <Link to="/dash">
                 <FontIcon className={'material-icons icons iconsLeft'}>
                     navigate_before
-                </FontIcon> 
+                </FontIcon>
               </Link>
             }
             iconElementRight={

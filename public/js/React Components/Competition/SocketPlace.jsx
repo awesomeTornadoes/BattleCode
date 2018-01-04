@@ -5,6 +5,7 @@ const socket = io();
 
 export default class SocketPlace extends Component {
   constructor(props) {
+    console.log(props);
     super(props);
     this.state = {
       msg: 'Game in Progress!',

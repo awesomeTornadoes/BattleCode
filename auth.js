@@ -7,13 +7,10 @@ exports.tokenCheck = (token, cb) => {
   client.verifyIdToken(
     token,
     CLIENT_ID,
-    function(e, login) {
-      let payload = login.getPayload();
-      let userid = payload['sub'];
+    (e, login) => {
+      const payload = login.getPayload();
+      // const userid = payload.sub;
       cb({
         email: payload.email,
       });
-    },
-  );
-};
-
+    })};

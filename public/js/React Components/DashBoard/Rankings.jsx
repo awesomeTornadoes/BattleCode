@@ -44,7 +44,7 @@ export default class Rankings extends Component {
     return (
       <div className="DashBoardThird">
         <div className="ListTitle">
-          <h1> Rankings </h1>
+          <h1> General Rankings </h1>
         </div>
         <ul className="DashBoardList">
           {RankingsList}
