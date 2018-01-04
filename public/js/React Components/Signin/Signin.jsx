@@ -36,6 +36,11 @@ export default class Signin extends Component {
       channel.bind('duel-event', (data) => {
         alert('An event was triggered with message: ' + data.message);
       });
+
+      channel.bind('duel-complete', (data) => {
+        alert(data.message);
+      });
+      
       this.setState({
         userLoginLoaded: true,
         user: userEmail,

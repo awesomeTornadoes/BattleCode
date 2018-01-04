@@ -35,13 +35,17 @@ export default class Test extends Component {
     try {
       mocha.suite.suites.splice(0, 1);
       eval(`${this.props.userInput}; ${this.props.test};`);
-
       setTimeout(() => {
         if (mocha.suite.suites[0].tests.every(test => test.state === 'passed')) {
           // The timer stops when all test pass
           this.setState({ timing: this.state.elapsed });
           clearInterval(this.timer);
           document.getElementsByClassName('Confetti')[0].style.display = 'block';
+          const duelId = window.location.hash.split('&duel=')[1];
+          if (duelId) {
+            axios.post('/duelUpdate', { email: this.props.user, gameId: this.props.testId, time: this.state.timing, duelId })
+              .then(res => console.log(res));
+          }
           if (this.props.passed === false) {
             axios.post('/gamewin', { email: this.props.user, gameId: this.props.testId, time: this.state.timing }).then((res) => {
             });

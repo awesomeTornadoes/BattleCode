@@ -30,10 +30,10 @@ export default class NavBar extends Component {
     this.setState({ open: !this.state.open });
   }
   render() {
-    const menuItems = this.state.duels.map((duel) => (
+    const menuItems = this.state.duels.filter(duel => !duel.complete).map(duel => (
       <MenuItem
         key={duel}
-        containerElement={<Link to={`/competition?id=${duel.challenge}`} />}
+        containerElement={<Link to={`/competition/?id=${duel.challenge}&duel=${duel._id}`} />}
         primaryText={duel.challenger}
       />
     ));
