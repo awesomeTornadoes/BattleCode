@@ -34,7 +34,7 @@ export default class Signin extends Component {
       const channel = pusher.subscribe(window.user);
 
       channel.bind('duel-event', (data) => {
-        alert('An event was triggered with message: ' + data.message);
+        alert(data.message);
       });
 
       channel.bind('duel-complete', (data) => {
@@ -45,6 +45,7 @@ export default class Signin extends Component {
         userLoginLoaded: true,
         user: userEmail,
       });
+      window.location.hash = '/dash';
     };
     xhr.send(`idtoken=${idToken}`);
   }

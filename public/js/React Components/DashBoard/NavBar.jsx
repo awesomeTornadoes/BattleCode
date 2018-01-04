@@ -4,12 +4,13 @@ import {
   MenuItem,
   Drawer,
   Badge,
-  FlatButton,
 } from 'material-ui';
 import MenuIcon from 'material-ui-icons/Menu';
-import { notification } from 'material-ui/svg-icons';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+// import { channel } from '../Signin/Signin';
+
+
 
 export default class NavBar extends Component {
   constructor(props) {
@@ -59,7 +60,7 @@ export default class NavBar extends Component {
           onRequestChange={open => this.setState({ open })}
           open={this.state.open}
         >
-          Your open challenges:
+          <p style={{ marginTop: '10px', marginLeft: '10px' }}>Your open challenges:</p>
           {menuItems}
         </Drawer>
       </div>
