@@ -73,13 +73,10 @@ export default class Test extends Component {
 
   render() {
     const pretty = prettyMs(this.state.elapsed, { verbose: true });
-    const start = moment(this.state.start).format('lll');
-
 
     return (
       <div>
         <h2>Your time is {pretty }</h2>
-        <h2>Your timing is {start }</h2>
         <Card>
           <CardText>
             <div id="mocha" ref={(mocha) => { this.mocha = mocha; }} style={{ margin: 0 }} />

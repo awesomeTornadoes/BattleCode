@@ -6,7 +6,8 @@ const path = require('path');
 const db = require('./dbTools');
 const auth = require('./auth');
 const Pusher = require('pusher');
-
+const config = require('./config');
+const {notifyOnChallenge} = require('./middleware/twilioNotifications');
 const app = express();
 
 app.use(express.static(path.join(__dirname, '/public')));
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({
   extended: true,
 }));
 app.use(bodyParser.json());
+
 
 const pusher = new Pusher({
   appId: '452960',
@@ -56,6 +58,15 @@ app.post('/signin', (req, res) => {
     });
   });
 });
+
+app.post('/text', (req, res) => {
+  const { user } = req.body;
+  notifyOnChallenge(user);
+  res.send(user);
+});
+
+
+
 app.get('/competitions', db.getChallenges);
 app.get('/competition', db.getChallengeById);
 app.post('/uniquecompetition', db.returnOneChallenge);
