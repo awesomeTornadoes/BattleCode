@@ -27,11 +27,6 @@ export default class Friends extends Component {
           this.setState({ FriendsList });
         }
       });
-    axios.get('/userwins', { headers: { user: this.props.user } })
-      .then((res) => {
-        console.log(res);
-        this.setState({ wins: res.data });
-      });
   }
   handleInput(event) {
     this.setState({ friendInput: event.target.value });

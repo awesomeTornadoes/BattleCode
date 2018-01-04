@@ -8,6 +8,7 @@ export default class PersonRankings extends Component {
     super();
     this.state = {
       GameList: [],
+      wins: [],
     };
     this.sendText = this.sendText.bind(this);
   }
@@ -33,6 +34,11 @@ export default class PersonRankings extends Component {
         });
       });
     });
+    axios.get('/userwins', { headers: { user: this.props.user } })
+      .then((res) => {
+        console.log(res);
+        this.setState({ wins: res.data });
+      });
   }
 
   sendText() {
