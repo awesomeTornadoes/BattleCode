@@ -141,6 +141,15 @@ exports.findUserById = (req, res) => {
     }
   });
 };
+exports.findUserByEmail = (req, res) => {
+  User.findOne(req.query).exec((err, success) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(success);
+    }
+  });
+};
 
 exports.gameWin = (req, res) => {
   User.findOne({
@@ -179,6 +188,18 @@ exports.getGameWinners = (req, res) => {
     }
   });
 };
+exports.getUserGame = (req, res) => {
+  console.log(req.query);
+  Game.find(req.query).exec((err, games) => {
+    console.log(games);
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(games);
+    }
+  });
+};
+
 
 exports.addFriend = (req, res) => {
   const { userEmail, friend } = req.body;
