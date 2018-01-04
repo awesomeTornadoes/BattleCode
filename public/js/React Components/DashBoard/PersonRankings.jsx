@@ -17,20 +17,17 @@ export default class PersonRankings extends Component {
         email: window.user,
       },
     }).then(({ data: user }) => {
-      console.log(user._id);
       axios.get('/usergames', {
         params: {
           winner: user._id,
         },
       }).then(({ data: games }) => {
-        console.log(games);
         games.forEach((game) => {
           axios.get('/competition', {
             params: {
               _id: game.challenge,
             },
           }).then(({ data: gameName }) => {
-            console.log(gameName.name, prettyMs(game.time, { verbose: true }));
             this.setState({ GameList: this.state.GameList.concat([[gameName.name, prettyMs(game.time, { verbose: true })]]) });
           });
         });
@@ -40,7 +37,7 @@ export default class PersonRankings extends Component {
 
   sendText() {
     axios.post('/text', { user: window.user.slice(0, window.user.indexOf('@')) })
-      .then(ans => console.log(ans));
+      .then(ans => { /*console.log(ans)*/ });
   }
 
   render() {

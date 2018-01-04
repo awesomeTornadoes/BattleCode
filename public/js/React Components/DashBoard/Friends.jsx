@@ -45,7 +45,6 @@ export default class Friends extends Component {
       });
   }
   sendChallenge(event) {
-    console.log(event.target.value);
     const challenger = this.props.user;
     axios.post('/duel', {
       challenger,

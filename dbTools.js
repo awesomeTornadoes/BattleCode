@@ -189,9 +189,7 @@ exports.getGameWinners = (req, res) => {
   });
 };
 exports.getUserGame = (req, res) => {
-  console.log(req.query);
   Game.find(req.query).exec((err, games) => {
-    console.log(games);
     if (err) {
       res.send(err);
     } else {
@@ -233,9 +231,7 @@ exports.getFriends = (req, res) => {
 exports.createDuel = (req, res) => {
   Challenge.find({})
     .then((challenges) => {
-      console.log('Found challenges ', challenges);
       const challenge = challenges[Math.floor(Math.random() * challenges.length)]._id;
-      console.log('challenge is ', challenge);
       const { challenger, challenged } = req.body;
       const duel = new Duel({ challenger, challenged, challenge });
       duel.save()

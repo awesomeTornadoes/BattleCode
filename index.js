@@ -29,7 +29,7 @@ const port = process.env.PORT || 5000;
 app.set('port', port);
 const server = app.listen(port, (err) => {
   if (err) {
-    console.log(err);
+    console.error(err);
   } else {
     console.log('listening on port', port);
   }
