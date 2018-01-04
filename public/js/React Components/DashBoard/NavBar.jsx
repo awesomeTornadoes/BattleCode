@@ -59,7 +59,7 @@ export default class NavBar extends Component {
           onRequestChange={open => this.setState({ open })}
           open={this.state.open}
         >
-          Your open challenges:
+          <p style={{ marginTop: '10px', marginLeft: '10px' }}>Your open challenges:</p>
           {menuItems}
         </Drawer>
       </div>
