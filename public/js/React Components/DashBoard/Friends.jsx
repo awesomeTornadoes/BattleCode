@@ -7,6 +7,7 @@ export default class Friends extends Component {
     super(props);
     this.state = {
       FriendsList: [],
+      wins: [],
       friendInput: '',
     };
     this.handleInput = this.handleInput.bind(this);
@@ -25,6 +26,11 @@ export default class Friends extends Component {
           }
           this.setState({ FriendsList });
         }
+      });
+    axios.get('/userwins', { headers: { user: this.props.user } })
+      .then((res) => {
+        console.log(res);
+        this.setState({ wins: res.data });
       });
   }
   handleInput(event) {
