@@ -55,14 +55,11 @@ export default class PersonRankings extends Component {
     return (
       <div className="DashBoardThird">
         <div className="ListTitle">
-          <h1> Your Timings </h1>
+          <h1> Your Challenges </h1>
         </div>
         <ul className="DashBoardList">
           {RankingsList}
         </ul>
-        <button onClick={this.sendText}>
-          Send Text
-        </button>
       </div>
     );
   }

@@ -11,6 +11,7 @@ export default class Friends extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.addFriend = this.addFriend.bind(this);
     this.sendChallenge = this.sendChallenge.bind(this);
+    this.sendText = this.sendText.bind(this);
   }
   componentWillMount() {
     axios.get('/getFriends', { headers: { user: this.props.user } })
@@ -47,6 +48,12 @@ export default class Friends extends Component {
     })
       .then(duel => console.log(duel));
   }
+
+  sendText() {
+    axios.post('/text', { user: window.user.slice(0, window.user.indexOf('@')) })
+      .then(res => console.log(res));
+  }
+
   render() {
     let FriendsList;
     if (this.state.FriendsList[0]) {
@@ -58,6 +65,11 @@ export default class Friends extends Component {
             onClick={this.sendChallenge}
             className="btn btn-primary"
           >Challenge {e}!</button>
+          <button
+            value={e}
+            onClick={this.sendText}
+            className="btn btn-primary"
+          >Text {e}!</button>
         </li>
       ));
     }

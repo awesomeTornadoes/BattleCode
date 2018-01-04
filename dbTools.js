@@ -27,6 +27,8 @@ const Schema = mongoose.Schema;
 const userSchema = Schema({
   username: String,
   email: String,
+  name: String,
+  phone: Number,
   friends: String,
 });
 
@@ -141,6 +143,18 @@ exports.findUserById = (req, res) => {
     }
   });
 };
+
+exports.updateInfo = (req, res) => {
+  const { email, name, phone } = req.body;
+  User.findOneAndUpdate({ email }, { name, phone }).exec((err, success) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(success);
+    }
+  });
+};
+
 exports.findUserByEmail = (req, res) => {
   User.findOne(req.query).exec((err, success) => {
     if (err) {

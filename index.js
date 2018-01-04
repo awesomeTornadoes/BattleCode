@@ -77,6 +77,7 @@ app.get('/usergames', db.getUserGame);
 app.get('/findUserById', db.findUserById);
 app.get('/findUserByEmail', db.findUserByEmail);
 app.post('/addFriend', db.addFriend);
+app.post('/updateinfo', db.updateInfo);
 app.get('/getFriends', db.getFriends);
 app.post('/duel', db.createDuel);
 // app.post('/duelUpdate', db.updateDuel);
