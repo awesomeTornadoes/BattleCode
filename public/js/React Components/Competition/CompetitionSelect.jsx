@@ -62,7 +62,7 @@ export default class CompetitionSelect extends Component {
           onRequestClose={this.handleRequestClose}
         >
           <Menu style={{ textAlign: 'center' }} >
-            {Competitions.length > 0 ? Competitions : <b>No Tests</b> }
+            {Competitions.length > 0 ? Competitions : <b>No challenges yet. Create one!</b> }
           </Menu>
         </Popover>
       </div>
