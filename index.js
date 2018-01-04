@@ -65,8 +65,6 @@ app.post('/text', (req, res) => {
   res.send(user);
 });
 
-
-
 app.get('/competitions', db.getChallenges);
 app.get('/competition', db.getChallengeById);
 app.post('/uniquecompetition', db.returnOneChallenge);
@@ -80,4 +78,4 @@ app.post('/addFriend', db.addFriend);
 app.get('/getFriends', db.getFriends);
 app.get('/duels', db.getDuels);
 app.post('/duel', db.createDuel);
-// app.post('/duelUpdate', db.updateDuel);
+app.post('/duelUpdate', db.updateDuel);
