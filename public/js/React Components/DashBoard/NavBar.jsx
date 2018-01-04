@@ -3,7 +3,11 @@ import {
   AppBar,
   MenuItem,
   Drawer,
+  Badge,
+  FlatButton,
 } from 'material-ui';
+import MenuIcon from 'material-ui-icons/Menu';
+import { notification } from 'material-ui/svg-icons';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -48,6 +52,7 @@ export default class NavBar extends Component {
           onLeftIconButtonTouchTap={() => this.toggleDrawer()}
           title="Battle Code"
           style={{ backgroundColor: '#4FB5DB' }}
+          iconElementLeft={<Badge badgeContent={menuItems.length}><MenuIcon style={{ color: 'white', cursor: 'pointer' }} /></Badge>}
         />
         <Drawer
           docked={false}
