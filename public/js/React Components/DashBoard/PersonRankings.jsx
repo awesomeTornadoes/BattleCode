@@ -49,7 +49,6 @@ export default class PersonRankings extends Component {
           wins.push(user);
           wins.push(winsObject[user]);
         }
-        console.log('wins', wins);
         this.setState({ wins });
       });
   }
@@ -68,12 +67,10 @@ export default class PersonRankings extends Component {
         </p>
       </li>
     ));
-    // console.log('state wins', this.state.wins);
     const userWins = [];
     for (let i = 0; i < this.state.wins.length; i += 2) {
-      userWins.push(<li>{this.state.wins[i + 1]} win(s) against {this.state.wins[i]}</li>);
+      userWins.push(<li>{this.state.wins[i + 1]} wins against {this.state.wins[i]}</li>);
     }
-    console.log('userwins', userWins);
     return (
       <div className="DashBoardThird">
         <div className="ListTitle">
@@ -84,7 +81,7 @@ export default class PersonRankings extends Component {
         </ul>
         <h4> Your wins </h4>
         <ul className="DashBoardList">
-          {userWins}
+          {userWins[0] ? userWins : 'Looks like you haven\'t won any challenges yet. Challenge someone!'}
         </ul>
         <button onClick={this.sendText}>
           Send Text
