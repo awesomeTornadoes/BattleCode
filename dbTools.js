@@ -57,6 +57,7 @@ const duelSchema = new Schema({
   challengerTime: Number,
   challengedTime: Number,
   winner: String,
+  complete: Boolean,
 });
 
 const Challenge = mongoose.model('Challenge', challengeSchema);
@@ -189,9 +190,7 @@ exports.getGameWinners = (req, res) => {
   });
 };
 exports.getUserGame = (req, res) => {
-  console.log(req.query);
   Game.find(req.query).exec((err, games) => {
-    console.log(games);
     if (err) {
       res.send(err);
     } else {
@@ -233,11 +232,9 @@ exports.getFriends = (req, res) => {
 exports.createDuel = (req, res) => {
   Challenge.find({})
     .then((challenges) => {
-      console.log('Found challenges ', challenges);
       const challenge = challenges[Math.floor(Math.random() * challenges.length)]._id;
-      console.log('challenge is ', challenge);
       const { challenger, challenged } = req.body;
-      const duel = new Duel({ challenger, challenged, challenge });
+      const duel = new Duel({ challenger, challenged, challenge, complete: false });
       duel.save()
         .then(() => {
           pusher.trigger(challenged, 'duel-event', { message: `You've been challenged by ${challenger}` });
@@ -247,6 +244,38 @@ exports.createDuel = (req, res) => {
     });
 };
 
-// exports.updateDuel = (req, res) => {
-//   const { challenge, challenger, challenged } = req.body;
-// };
+exports.getDuels = (req, res) => {
+  const { user } = req.headers;
+  Duel.find({ challenged: user })
+    .then(duel => res.status(200).send(duel))
+    .catch(err => res.status(404).send(err));
+};
+
+exports.updateDuel = (req, res) => {
+  const {
+    duelId,
+    email,
+    time,
+  } = req.body;
+  console.log(req.body);
+  Duel.findOne({ _id: duelId })
+    .then((duel) => {
+      console.log('found duel', duel);
+      if (email === duel.challenger) {
+        duel.challengerTime = time;
+      } else {
+        duel.challengedTime = time;
+      }
+      if (duel.challengerTime && duel.challengedTime) {
+        duel.winner = duel.challengerTime < duel.challengedTime ? duel.challenger : duel.challenged;
+        duel.complete = true;
+        pusher.trigger(challenged, 'duel-complete', { message: `Your challenge with ${challenger} is complete! The winner is ${duel.winner}` });
+        pusher.trigger(challenger, 'duel-complete', { message: `Your challenge with ${challenged} is complete! The winner is ${duel.winner}` });
+      }
+      duel.save();
+      res.status(204).send(duel);
+    })
+    .catch(err => res.status(500).send(err));
+};
+
+// { email: this.props.user, gameId: this.props.testId, time: this.state.timing, duelId })

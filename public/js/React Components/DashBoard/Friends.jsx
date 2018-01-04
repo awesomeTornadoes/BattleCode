@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link, Route } from 'react-router-dom';
 import axios from 'axios';
 
 export default class Friends extends Component {
@@ -15,8 +16,13 @@ export default class Friends extends Component {
   componentWillMount() {
     axios.get('/getFriends', { headers: { user: this.props.user } })
       .then((response) => {
+        let FriendsList;
         if (response.data) {
-          const FriendsList = [response.data];
+          if(response.data.length > 1) {
+            FriendsList = response.data;
+          } else {
+            FriendsList = [response.data];
+          }
           this.setState({ FriendsList });
         }
       });
@@ -39,13 +45,17 @@ export default class Friends extends Component {
       });
   }
   sendChallenge(event) {
-    console.log(event.target.value);
     const challenger = this.props.user;
     axios.post('/duel', {
       challenger,
       challenged: event.target.value,
     })
-      .then(duel => console.log(duel));
+      .then((response) => {
+        console.log(response);
+        // Figoure out how to do this with react router
+        window.location.hash = `/competition/?id=${response.data.challenge}&duel=${response.data._id}`;
+      })
+      .catch(err => console.error(err));
   }
   render() {
     let FriendsList;

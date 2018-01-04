@@ -6,12 +6,13 @@ import Badges from './Badges';
 import Rankings from './Rankings';
 import PersonRankings from './PersonRankings';
 import Friends from './Friends';
+import NavBar from './NavBar';
 import CompetitionSelect from '../Competition/CompetitionSelect';
 
 const DashBoard = props => (
   <MuiThemeProvider >
     <div className="Dashboard">
-      <AppBar showMenuIconButton={false} title="Dashboard" style={{ backgroundColor: '#4FB5DB' }} />
+      <NavBar user={props.user} />
       <Card>
         <div>
           <CompetitionSelect />
@@ -30,6 +31,7 @@ const DashBoard = props => (
     </div>
   </MuiThemeProvider >
 );
+
 
 DashBoard.propTypes = {
   user: PropTypes.string.isRequired,
