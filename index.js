@@ -7,7 +7,8 @@ const db = require('./dbTools');
 const auth = require('./auth');
 const Pusher = require('pusher');
 const config = require('./config');
-const {notifyOnChallenge} = require('./middleware/twilioNotifications');
+const { notifyOnChallenge } = require('./middleware/twilioNotifications');
+
 const app = express();
 
 app.use(express.static(path.join(__dirname, '/public')));
@@ -39,7 +40,7 @@ const server = app.listen(port, (err) => {
 const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
-  console.log('connected');
+  console.log('socket connected');
   socket.on('room', (data) => {
     console.log('in joining room in SERVER', data);
     const room = 'alpha';
@@ -60,8 +61,8 @@ app.post('/signin', (req, res) => {
 });
 
 app.post('/text', (req, res) => {
-  const { user } = req.body;
-  notifyOnChallenge(user);
+  const { user, phone } = req.body;
+  notifyOnChallenge(user, phone);
   res.send(user);
 });
 
@@ -75,6 +76,7 @@ app.get('/usergames', db.getUserGame);
 app.get('/findUserById', db.findUserById);
 app.get('/findUserByEmail', db.findUserByEmail);
 app.post('/addFriend', db.addFriend);
+app.post('/updateinfo', db.updateInfo);
 app.get('/getFriends', db.getFriends);
 app.get('/duels', db.getDuels);
 app.post('/duel', db.createDuel);

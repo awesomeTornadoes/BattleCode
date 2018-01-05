@@ -10,7 +10,6 @@ export default class PersonRankings extends Component {
       GameList: [],
       wins: [],
     };
-    this.sendText = this.sendText.bind(this);
   }
   componentWillMount() {
     axios.get('/findUserByEmail', {
@@ -53,10 +52,6 @@ export default class PersonRankings extends Component {
       });
   }
 
-  sendText() {
-    axios.post('/text', { user: window.user.slice(0, window.user.indexOf('@')) })
-      .then(ans => { /*console.log(ans)*/ });
-  }
 
   render() {
     const RankingsList = this.state.GameList.map((e, i) => (
@@ -84,9 +79,6 @@ export default class PersonRankings extends Component {
         <ul className="DashBoardList">
           {userWins[0] ? userWins : 'Looks like you haven\'t won any challenges yet. Challenge someone!'}
         </ul>
-        <button onClick={this.sendText}>
-          Send Text
-        </button>
       </div>
     );
   }

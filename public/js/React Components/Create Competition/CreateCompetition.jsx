@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PreviewTest from './PreviewTest';
 import Expect from './Expect';
+import Difficulty from './Difficulty';
 
 export default class CreateCompetition extends Component {
   constructor(props) {
@@ -136,6 +137,8 @@ export default class CreateCompetition extends Component {
                     underlineFocusStyle={{ borderColor: '#FF6F00' }}
                     fullWidth
                   />
+                  <h2>Level of Difficulty {this.state.expects - 1}</h2>
+                  <Difficulty points={this.state.expects - 1} />
                 </CardText>
               </Card>
             </CardText>
@@ -145,3 +148,5 @@ export default class CreateCompetition extends Component {
     );
   }
 }
+
+// <Difficulty points={Object.keys(this.state.tests).length + 1} />

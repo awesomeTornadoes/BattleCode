@@ -13,13 +13,14 @@ export default class Friends extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.addFriend = this.addFriend.bind(this);
     this.sendChallenge = this.sendChallenge.bind(this);
+    this.sendText = this.sendText.bind(this);
   }
   componentWillMount() {
     axios.get('/getFriends', { headers: { user: this.props.user } })
       .then((response) => {
         let FriendsList;
         if (response.data) {
-          if(response.data.length > 1) {
+          if (response.data.length > 1) {
             FriendsList = response.data;
           } else {
             FriendsList = [response.data];
@@ -58,6 +59,19 @@ export default class Friends extends Component {
       })
       .catch(err => console.error(err));
   }
+
+  sendText(event) {
+    console.log(event.target.value);
+    axios.get('/findUserByEmail', {
+      params: {
+        email: this.props.user,
+      },
+    }).then(({ data: user }) => {
+      axios.post('/text', { user: window.user.slice(0, window.user.indexOf('@')), phone: user.phone })
+        .then(res => console.log(res));
+    });
+  }
+
   render() {
     let FriendsList;
     if (this.state.FriendsList[0]) {
@@ -69,6 +83,11 @@ export default class Friends extends Component {
             onClick={this.sendChallenge}
             className="btn btn-info btn-sm"
           >Challenge {e}!</button>
+          <button
+            value={e}
+            onClick={this.sendText}
+            className="btn btn-primary"
+          >Text {e}!</button>
         </li>
       ));
     }
