@@ -83,5 +83,4 @@ export default class Expect extends Component {
 Expect.propTypes = {
   updateTests: PropTypes.func.isRequired,
   removeExpect: PropTypes.func.isRequired,
-  tests: PropTypes.object.isRequired,
 };
