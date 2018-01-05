@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { blue300 } from 'material-ui/styles/colors';
-import { red300 } from 'material-ui/styles/colors';
+import { blue300, red300, white } from 'material-ui/styles/colors';
 import Avatar from 'material-ui/Avatar';
-import { white } from 'material-ui/styles/colors';
 import axios from 'axios';
 
 export default class Badges extends Component {
@@ -36,6 +34,7 @@ export default class Badges extends Component {
   render() {
     const avatar1 = (
       <Avatar
+        key="J"
         color={white}
         backgroundColor={blue300}
         size={50}
@@ -45,6 +44,7 @@ export default class Badges extends Component {
     );
     const avatar2 = (
       <Avatar
+        key="S"
         color={white}
         backgroundColor={red300}
         size={50}
@@ -62,7 +62,7 @@ export default class Badges extends Component {
           <h1> Your Badges </h1>
         </div>
         <h3>Your points : {this.state.badges}</h3>
-        <p>{avatarList}</p>
+        <h5>{avatarList}</h5>
       </div>
     );
   }
