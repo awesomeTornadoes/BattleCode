@@ -80,8 +80,8 @@ export default class NavBar extends Component {
           title="Battle Code"
           style={{ backgroundColor: '#4FB5DB' }}
           iconElementLeft={
-            this.state.duels.length ?
-              <Badge secondary badgeContent={this.state.duels.length}>
+            menuItems.length ?
+              <Badge secondary badgeContent={menuItems.length}>
                 <MenuIcon style={{ color: 'white', cursor: 'pointer' }} />
               </Badge>
               :
