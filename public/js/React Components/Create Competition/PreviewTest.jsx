@@ -7,7 +7,7 @@ const PreviewTest = props => (
   <Paper className="Preview">
     <h2>Preview</h2>
     {parseToMocha(props.tests, props.name).split('\n').map((line, i) => (
-      <span key={line[i]}>
+      <span>
         {line}
         <br />
       </span>
