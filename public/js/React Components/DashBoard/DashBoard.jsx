@@ -32,10 +32,8 @@ export default class DashBoard extends Component {
         email: this.props.user,
       },
     }).then(({ data }) => {
-      console.log(data);
       this.setState({ userName: data.name });
-      // this.state.userName = user;
-    })
+    });
   }
   render() {
     return (
