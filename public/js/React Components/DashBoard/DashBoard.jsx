@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, MuiThemeProvider, RaisedButton } from 'material-ui';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import PersonInfo from './PersonInfo';
 import Rankings from './Rankings';
 import PersonRankings from './PersonRankings';
@@ -47,3 +48,7 @@ export default class DashBoard extends Component {
     );
   }
 }
+
+DashBoard.propTypes = {
+  user: PropTypes.string.isRequired,
+};

@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LinearProgress from 'material-ui/LinearProgress';
+
 
 export default class Difficulty extends React.Component {
   constructor(props) {
@@ -26,3 +28,7 @@ export default class Difficulty extends React.Component {
     );
   }
 }
+
+Difficulty.propTypes = {
+  points: PropTypes.number.isRequired,
+};

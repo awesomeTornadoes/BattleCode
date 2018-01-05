@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 export default class Friends extends Component {
@@ -114,3 +114,7 @@ export default class Friends extends Component {
     );
   }
 }
+
+Friends.propTypes = {
+  user: PropTypes.string.isRequired,
+};

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 const moment = require('moment');
 const prettyMs = require('pretty-ms');
@@ -37,8 +38,8 @@ export default class Timer extends Component {
     const pretty = prettyMs(this.state.elapsed, { verbose: true });
     const totalSeconds = this.state.elapsed / 1000;
     const hour = (`0${Math.floor(totalSeconds / 3600)}`.slice(-2));
-    const minute = (`0${  Math.floor((totalSeconds - hour * 3600) / 60)}`.slice(-2));
-    const seconds = (`0${  Math.floor(totalSeconds - (hour * 3600 + minute * 60))}`.slice(-2));
+    const minute = (`0${Math.floor((totalSeconds - hour * 3600) / 60)}`.slice(-2));
+    const seconds = (`0${Math.floor(totalSeconds - (hour * 3600 + minute * 60))}`.slice(-2));
 
     return (
       <div id="timer">
@@ -48,3 +49,6 @@ export default class Timer extends Component {
   }
 }
 
+Timer.propTypes = {
+  done: PropTypes.bool.isRequired,
+};

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Timer from './Timer';
 import { Card, CardText } from 'material-ui';
 import axios from 'axios';
+import Timer from './Timer';
 
 const prettyMs = require('pretty-ms');
 
@@ -60,7 +60,7 @@ export default class Test extends Component {
   }
 
   render() {
-    const pretty = prettyMs(this.state.elapsed, { verbose: true });
+    // const pretty = prettyMs(this.state.elapsed, { verbose: true });
 
     return (
       <div>
@@ -84,5 +84,6 @@ Test.propTypes = {
   userInput: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
   testId: PropTypes.string.isRequired,
-  passed: PropTypes.string.isRequired,
+  passed: PropTypes.bool.isRequired,
+  update: PropTypes.func.isRequired,
 };
