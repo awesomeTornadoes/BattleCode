@@ -76,7 +76,6 @@ export default class Friends extends Component {
         <li key={e[i]} className="FriendsList">
           <h4>{e}</h4>
           <button
-            backgroundColor="#4FB5DB"
             value={e}
             onClick={this.sendChallenge && this.sendText}
             className="btn btn-primary"
@@ -101,7 +100,6 @@ export default class Friends extends Component {
             />
             <button
               onClick={this.addFriend}
-              backgroundColor="#4FB5DB"
               className="btn btn-primary"
               type="submit"
               value="Submit"
