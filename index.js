@@ -43,7 +43,6 @@ io.on('connection', (socket) => {
   console.log('socket connected');
   socket.on('room', (data) => {
     console.log('in joining room in SERVER', data);
-    window.alert(`You join room ${data.testName}`);
     const room = 'alpha';
     // socket.join(room)
     socket.emit('new user join', ['user']);

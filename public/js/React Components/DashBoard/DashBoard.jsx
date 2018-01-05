@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, MuiThemeProvider, RaisedButton } from 'material-ui';
 import { Link } from 'react-router-dom';
-import Badges from './Badges';
+import PersonInfo from './PersonInfo';
 import Rankings from './Rankings';
 import PersonRankings from './PersonRankings';
 import Friends from './Friends';
@@ -31,9 +31,11 @@ export default class DashBoard extends Component {
               <Link to="CreateCompetition">
                 <RaisedButton fullWidth label="Create A Challenge" />
               </Link>
-              <div style={{ textAlign: 'center' }}>Welcome {this.props.user.slice(0, this.props.user.indexOf('@'))}!</div>
+              <div style={{ textAlign: 'center' }}>
+                <h1>Welcome {this.props.user.slice(0, this.props.user.indexOf('@'))}!</h1>
+              </div>
               <div className="DashBoardFlex">
-                <Badges />
+                <PersonInfo />
                 <Rankings />
                 <PersonRankings user={this.props.user} />
                 <Friends user={this.props.user} />
