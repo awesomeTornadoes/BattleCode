@@ -7,7 +7,7 @@ import CreateCompetition from './Create Competition/CreateCompetition';
 
 const NotFound = () => (<h1>404</h1>);
 
-const App = () => (
+const App = (props) => (
   <HashRouter>
     <Switch>
       <Route
