@@ -4,7 +4,7 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import axios from 'axios';
-
+import Badges from './Badges';
 
 export default class PersonInfo extends Component {
   constructor() {
@@ -25,7 +25,7 @@ export default class PersonInfo extends Component {
     }).then(({ data: user }) => {
       console.log(user);
       console.log('personInfo');
-      this.setState({ name: user.name, phone: user.phone })
+      this.setState({ name: user.name, phone: user.phone });
     });
   }
 
@@ -68,6 +68,7 @@ export default class PersonInfo extends Component {
         <br />
         <RaisedButton secondary label="UPDATE" style={style} onClick={this.handleSubmit} />
         <br />
+        <Badges />
       </div>
     );
   }
