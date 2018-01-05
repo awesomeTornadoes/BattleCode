@@ -67,11 +67,13 @@ export default class Test extends Component {
         <div>
           <Timer start={this.state.start} elapsed={this.state.elasped} done={this.state.done} />
         </div>
-        <Card>
-          <CardText >
-            <div id="mocha" ref={(mocha) => { this.mocha = mocha; }} style={{ margin: 0 }} />
-          </CardText>
-        </Card>
+        {this.props.passed ? <div><h3>You passed!</h3></div>
+          : <Card>
+            <CardText >
+              <div id="mocha" ref={(mocha) => { this.mocha = mocha; }} style={{ margin: 0 }} />
+            </CardText>
+          </Card>
+        }
       </div>
     );
   }
@@ -82,4 +84,5 @@ Test.propTypes = {
   userInput: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
   testId: PropTypes.string.isRequired,
+  passed: PropTypes.string.isRequired,
 };
