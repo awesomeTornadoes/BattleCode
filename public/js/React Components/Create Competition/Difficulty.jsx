@@ -4,7 +4,6 @@ import LinearProgress from 'material-ui/LinearProgress';
 export default class Difficulty extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
 
     this.state = {
       completed: 0,

@@ -53,15 +53,13 @@ export default class Friends extends Component {
       challenged: event.target.value,
     })
       .then((response) => {
-        console.log(response);
-        // Figoure out how to do this with react router
         window.location.hash = `/competition/?id=${response.data.challenge}&duel=${response.data._id}`;
       })
       .catch(err => console.error(err));
+    return true;
   }
 
   sendText(event) {
-    console.log(event.target.value);
     axios.get('/findUserByEmail', {
       params: {
         email: this.props.user,
@@ -80,14 +78,9 @@ export default class Friends extends Component {
           <h4>{e}</h4>
           <button
             value={e}
-            onClick={this.sendChallenge}
+            onClick={this.sendChallenge && this.sendText}
             className="btn btn-info btn-sm"
           >Challenge {e}!</button>
-          <button
-            value={e}
-            onClick={this.sendText}
-            className="btn btn-primary"
-          >Text {e}!</button>
         </li>
       ));
     }

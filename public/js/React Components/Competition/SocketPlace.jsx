@@ -5,7 +5,6 @@ const socket = io();
 
 export default class SocketPlace extends Component {
   constructor(props) {
-    // console.log(props);
     super(props);
     this.state = {
       msg: 'Game in Progress!',
@@ -18,9 +17,7 @@ export default class SocketPlace extends Component {
     this.checkWin();
     socket.emit('room', this.props);
     socket.on('new user join', (data) => {
-      // console.log(data, 'newuser');
       let newP = this.state.players.concat(data.user);
-      // this.setState({ players: newP });
     });
   }
   checkWin() {

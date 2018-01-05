@@ -5,7 +5,6 @@ import { Card, CardText } from 'material-ui';
 import axios from 'axios';
 
 const prettyMs = require('pretty-ms');
-const moment = require('moment');
 
 export default class Test extends Component {
   constructor(props) {
@@ -16,12 +15,10 @@ export default class Test extends Component {
       timing: 0,
       done: false,
     };
-    // this.tick = this.tick.bind(this);
   }
 
 
   componentDidMount() {
-    // this.timer = setInterval(this.tick, 500);
     this.setState({ start: Date.now() });
 
     try {
@@ -37,11 +34,9 @@ export default class Test extends Component {
     try {
       mocha.suite.suites.splice(0, 1);
       eval(`${this.props.userInput}; ${this.props.test};`);
-      setTimeout(() => {
+      this.timerId = setTimeout(() => {
         if (mocha.suite.suites[0].tests.every(test => test.state === 'passed')) {
-          // The timer stops when all test pass
           this.setState({ timing: new Date() - this.state.start, done: true });
-          // clearInterval(this.timer);
           document.getElementsByClassName('Confetti')[0].style.display = 'block';
           const duelId = window.location.hash.split('&duel=')[1];
           if (duelId) {
@@ -60,18 +55,9 @@ export default class Test extends Component {
     }
   }
 
-  // componentWillUnmount() {
-  //   // This method is called immediately before the component is removed
-  //   // from the page and destroyed. We can clear the interval here:
-
-  //   clearInterval(this.timer);
-  // }
-
-  // tick() {
-  //   // This function is called every 50 ms. It updates the
-  //   // elapsed counter. Calling setState causes the component to be re-rendered
-  //   this.setState({ elapsed: new Date() - this.state.start });
-  // }
+  componentWillUnmount() {
+    clearInterval(this.timerId);
+  }
 
   render() {
     const pretty = prettyMs(this.state.elapsed, { verbose: true });
@@ -96,6 +82,4 @@ Test.propTypes = {
   userInput: PropTypes.string.isRequired,
   user: PropTypes.string.isRequired,
   testId: PropTypes.string.isRequired,
-  // start: PropTypes.Date.isRequired,
-  // compDescState: PropTypes.function.isRequired,
 };
