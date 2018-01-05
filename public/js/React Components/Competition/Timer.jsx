@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+const moment = require('moment');
 const prettyMs = require('pretty-ms');
 
 export default class Timer extends Component {
@@ -35,30 +36,15 @@ export default class Timer extends Component {
   render() {
     const pretty = prettyMs(this.state.elapsed, { verbose: true });
     const totalSeconds = this.state.elapsed / 1000;
-    const hour = Math.floor(totalSeconds / 3600);
-    const minute = Math.floor((totalSeconds - hour * 3600) / 60);
-    const seconds = Math.floor(totalSeconds - (hour * 3600 + minute * 60));
+    const hour = (`0${Math.floor(totalSeconds / 3600)}`.slice(-2));
+    const minute = (`0${  Math.floor((totalSeconds - hour * 3600) / 60)}`.slice(-2));
+    const seconds = (`0${  Math.floor(totalSeconds - (hour * 3600 + minute * 60))}`.slice(-2));
 
     return (
       <div id="timer">
-        <h2> {pretty} </h2>
         <h2> {hour} : {minute}: {seconds} </h2>
       </div>
     );
   }
 }
 
-// function getTimeRemaining(endtime) {
-//   var t = Date.parse(endtime) - Date.parse(new Date());
-//   var seconds = Math.floor((t / 1000) % 60);
-//   var minutes = Math.floor((t / 1000 / 60) % 60);
-//   var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-//   var days = Math.floor(t / (1000 * 60 * 60 * 24));
-//   return {
-//     'total': t,
-//     'days': days,
-//     'hours': hours,
-//     'minutes': minutes,
-//     'seconds': seconds
-//   };
-// }
