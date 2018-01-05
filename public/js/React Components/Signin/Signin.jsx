@@ -19,7 +19,7 @@ export default class Signin extends Component {
     const idToken = googleUser.getAuthResponse().id_token;
     const profile = googleUser.getBasicProfile();
     const userEmail = profile.getEmail();
-    console.log({ accessToken: idToken, email: userEmail });
+    // console.log({ accessToken: idToken, email: userEmail });
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '/signin', true);
@@ -27,17 +27,20 @@ export default class Signin extends Component {
     xhr.onload = () => {
       window.isLoggedIn = true;
       window.user = userEmail;
-      
       const pusher = new Pusher('c4b754fe17b65799b281', {
         cluster: 'us2',
       });
-      console.log('pusher is done');
 
       const channel = pusher.subscribe(window.user);
 
       channel.bind('duel-event', (data) => {
         alert('An event was triggered with message: ' + data.message);
       });
+
+      channel.bind('duel-complete', (data) => {
+        alert(data.message);
+      });
+      
       this.setState({
         userLoginLoaded: true,
         user: userEmail,

@@ -29,7 +29,7 @@ const port = process.env.PORT || 5000;
 app.set('port', port);
 const server = app.listen(port, (err) => {
   if (err) {
-    console.log(err);
+    console.error(err);
   } else {
     console.log('listening on port', port);
   }
@@ -65,8 +65,6 @@ app.post('/text', (req, res) => {
   res.send(user);
 });
 
-
-
 app.get('/competitions', db.getChallenges);
 app.get('/competition', db.getChallengeById);
 app.post('/uniquecompetition', db.returnOneChallenge);
@@ -79,5 +77,7 @@ app.get('/findUserByEmail', db.findUserByEmail);
 app.post('/addFriend', db.addFriend);
 app.post('/updateinfo', db.updateInfo);
 app.get('/getFriends', db.getFriends);
+app.get('/duels', db.getDuels);
 app.post('/duel', db.createDuel);
-// app.post('/duelUpdate', db.updateDuel);
+app.post('/duelUpdate', db.updateDuel);
+app.get('/userwins', db.getUserWins);
