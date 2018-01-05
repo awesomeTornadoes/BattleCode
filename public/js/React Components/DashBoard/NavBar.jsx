@@ -37,7 +37,7 @@ export default class NavBar extends Component {
     const channel = pusher.subscribe(window.user);
 
     channel.bind('duel-event', (data) => {
-      // alert(data.message);
+      alert(data.message);
       axios.get('/duels', { headers: { user: this.props.user } })
         .then((response) => {
           this.setState({ duels: response.data });

@@ -244,6 +244,8 @@ exports.getFriends = (req, res) => {
 };
 
 exports.createDuel = (req, res) => {
+  console.log('creating duel');
+  console.log(req.body);
   Challenge.find({})
     .then((challenges) => {
       const challenge = challenges[Math.floor(Math.random() * challenges.length)]._id;
