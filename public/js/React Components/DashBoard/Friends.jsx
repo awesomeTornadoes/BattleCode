@@ -49,6 +49,7 @@ export default class Friends extends Component {
   }
   sendChallenge(event) {
     const challenger = this.props.user;
+    console.log(event.target);
     axios.post('/duel', {
       challenger,
       challenged: event.target.value,
@@ -57,16 +58,14 @@ export default class Friends extends Component {
         window.location.hash = `/competition/?id=${response.data.challenge}&duel=${response.data._id}`;
       })
       .catch(err => console.error(err));
-    return true;
   }
-
   sendText(event) {
     axios.get('/findUserByEmail', {
       params: {
         email: this.props.user,
       },
     }).then(({ data: user }) => {
-      axios.post('/text', { user: window.user.slice(0, window.user.indexOf('@')), phone: user.phone })
+      axios.post('/text', { user: window.user.slice(0, window.user.indexOf('@')), phone: '5043430627' })
         .then(res => console.log(res));
     });
   }
@@ -76,13 +75,12 @@ export default class Friends extends Component {
       FriendsList = this.state.FriendsList.map((e, i) => (
         <li key={e[i]} className="FriendsList">
           <h4>{e}</h4>
-          <RaisedButton
+          <button
             backgroundColor="#4FB5DB"
-            buttonStyle={{ color: 'white' }}
             value={e}
             onClick={this.sendChallenge && this.sendText}
-            className="friendButton"
-          >Challenge {e}!</RaisedButton>
+            className="btn btn-primary"
+          >Challenge {e}!</button>
         </li>
       ));
     }
@@ -101,14 +99,13 @@ export default class Friends extends Component {
               onChange={this.handleInput}
               className="form-control"
             />
-            <RaisedButton
+            <button
               onClick={this.addFriend}
               backgroundColor="#4FB5DB"
-              buttonStyle={{ color: 'white' }}
-              className="friendButton"
+              className="btn btn-primary"
               type="submit"
               value="Submit"
-            >Add friend</RaisedButton>
+            >Add friend</button>
           </form>
         </div>
         <ul className="DashBoardList">

@@ -157,7 +157,6 @@ exports.updateInfo = (req, res) => {
 };
 
 exports.findUserByEmail = (req, res) => {
-  console.log(req);
   User.findOne(req.query).exec((err, success) => {
     if (err) {
       res.send(err);
@@ -245,6 +244,8 @@ exports.getFriends = (req, res) => {
 };
 
 exports.createDuel = (req, res) => {
+  console.log('creating duel');
+  console.log(req.body);
   Challenge.find({})
     .then((challenges) => {
       const challenge = challenges[Math.floor(Math.random() * challenges.length)]._id;
