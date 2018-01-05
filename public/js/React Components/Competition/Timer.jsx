@@ -17,7 +17,7 @@ export default class Timer extends Component {
 
   componentDidMount() {
     // this.setState({ start: this.props.start });
-    this.timer = setInterval(this.tick, 50);
+    this.timer = setInterval(this.tick, 13);
   }
 
   componentWillUpdate() {
