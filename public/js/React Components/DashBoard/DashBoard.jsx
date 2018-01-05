@@ -1,12 +1,7 @@
 import React from 'react';
 import { AppBar, Card, MuiThemeProvider, RaisedButton } from 'material-ui';
 import { Link } from 'react-router-dom';
-import Avatar from 'material-ui/Avatar';
 import PropTypes from 'prop-types';
-import {
-  purple500,
-  white,
-} from 'material-ui/styles/colors';
 import PersonInfo from './PersonInfo';
 import Rankings from './Rankings';
 import PersonRankings from './PersonRankings';
@@ -27,13 +22,6 @@ const DashBoard = props => (
           </Link>
           <div style={{ textAlign: 'center' }}>
             <h1>Welcome {props.user.slice(0, props.user.indexOf('@'))}!</h1>
-            <Avatar
-              color={white}
-              backgroundColor={purple500}
-              size={30}
-            >
-              {window.user.slice(0, 1).toUpperCase()}
-            </Avatar>
           </div>
           <div className="DashBoardFlex">
             <PersonInfo />

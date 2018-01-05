@@ -7,7 +7,8 @@ const db = require('./dbTools');
 const auth = require('./auth');
 const Pusher = require('pusher');
 const config = require('./config');
-const {notifyOnChallenge} = require('./middleware/twilioNotifications');
+const { notifyOnChallenge } = require('./middleware/twilioNotifications');
+
 const app = express();
 
 app.use(express.static(path.join(__dirname, '/public')));
@@ -39,9 +40,10 @@ const server = app.listen(port, (err) => {
 const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
-  console.log('connected');
+  console.log('socket connected');
   socket.on('room', (data) => {
     console.log('in joining room in SERVER', data);
+    window.alert(`You join room ${data.testName}`);
     const room = 'alpha';
     // socket.join(room)
     socket.emit('new user join', ['user']);

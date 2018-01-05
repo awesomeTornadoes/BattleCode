@@ -10,6 +10,11 @@ import MenuIcon from 'material-ui-icons/Menu';
 import { notification } from 'material-ui/svg-icons';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Avatar from 'material-ui/Avatar';
+import {
+  purple500,
+  white,
+} from 'material-ui/styles/colors';
 
 export default class NavBar extends Component {
   constructor(props) {
@@ -46,6 +51,15 @@ export default class NavBar extends Component {
         primaryText={duel.challenger}
       />
     ));
+    const avatar = (
+      <Avatar
+        color={white}
+        backgroundColor={purple500}
+        size={50}
+      >
+        {window.user.slice(0, 1).toUpperCase()}
+      </Avatar>
+    );
     return (
       <div>
         <AppBar
@@ -53,6 +67,7 @@ export default class NavBar extends Component {
           title="Battle Code"
           style={{ backgroundColor: '#4FB5DB' }}
           iconElementLeft={<Badge badgeContent={menuItems.length}><MenuIcon style={{ color: 'white', cursor: 'pointer' }} /></Badge>}
+          iconElementRight={avatar}
         />
         <Drawer
           docked={false}
