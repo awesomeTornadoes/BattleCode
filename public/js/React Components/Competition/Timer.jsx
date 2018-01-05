@@ -16,7 +16,7 @@ export default class Timer extends Component {
 
   componentDidMount() {
     // this.setState({ start: this.props.start });
-    this.timer = setInterval(this.tick, 500);
+    this.timer = setInterval(this.tick, 50);
   }
 
   componentWillUpdate() {
@@ -35,14 +35,19 @@ export default class Timer extends Component {
 
   render() {
     const pretty = prettyMs(this.state.elapsed, { verbose: true });
+    const totalMSeconds = this.state.elapsed;
     const totalSeconds = this.state.elapsed / 1000;
-    const hour = (`0${Math.floor(totalSeconds / 3600)}`.slice(-2));
-    const minute = (`0${  Math.floor((totalSeconds - hour * 3600) / 60)}`.slice(-2));
-    const seconds = (`0${  Math.floor(totalSeconds - (hour * 3600 + minute * 60))}`.slice(-2));
+    const hour = (`0${Math.floor(totalMSeconds / 3600000)}`.slice(-2));
+    const minute = (`0${  Math.floor((totalMSeconds - hour * 3600000) / 60000)}`.slice(-2));
+    const seconds = (`0${Math.floor((totalMSeconds - (hour * 3600000 + minute * 60000)) / 1000)}`.slice(-2));
+    const milliseconds = (`0${  Math.floor(totalMSeconds - (hour * 3600000 + minute * 60000 + seconds * 1000))}`.slice(-2));
+    // const hour = (`0${Math.floor(totalSeconds / 3600)}`.slice(-2));
+    // const minute = (`0${  Math.floor((totalSeconds - hour * 3600) / 60)}`.slice(-2));
+    // const seconds = (`0${  Math.floor(totalSeconds - (hour * 3600 + minute * 60))}`.slice(-2));
 
     return (
       <div id="timer">
-        <h2> {hour} : {minute}: {seconds} </h2>
+        <h2 id="timer2"> {hour} : {minute} : {seconds} : {milliseconds} </h2>
       </div>
     );
   }
