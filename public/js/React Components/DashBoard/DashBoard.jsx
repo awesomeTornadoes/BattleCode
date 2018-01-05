@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, MuiThemeProvider, RaisedButton } from 'material-ui';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import PersonInfo from './PersonInfo';
 import Rankings from './Rankings';
 import PersonRankings from './PersonRankings';
@@ -10,6 +11,12 @@ import NavBar from './NavBar';
 import CompetitionSelect from '../Competition/CompetitionSelect';
 
 export default class DashBoard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userName: '',
+    };
+  }
   componentWillMount() {
     const pusher = new Pusher('c4b754fe17b65799b281', {
       cluster: 'us2',
@@ -20,6 +27,15 @@ export default class DashBoard extends Component {
     channel.bind('duel-complete', (data) => {
       alert(data.message);
     });
+    axios.get('/findUserByEmail', {
+      params: {
+        email: this.props.user,
+      },
+    }).then(({ data }) => {
+      console.log(data);
+      this.setState({ userName: data.name });
+      // this.state.userName = user;
+    })
   }
   render() {
     return (
@@ -33,7 +49,7 @@ export default class DashBoard extends Component {
                 <RaisedButton fullWidth label="Create A Challenge" />
               </Link>
               <div style={{ textAlign: 'center' }}>
-                <h1>Welcome {this.props.user.slice(0, this.props.user.indexOf('@'))}!</h1>
+                <h1>Welcome {this.state.userName}!</h1>
               </div>
               <div className="DashBoardFlex">
                 <PersonInfo />
