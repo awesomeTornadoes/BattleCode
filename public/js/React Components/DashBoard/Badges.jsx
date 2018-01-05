@@ -54,15 +54,15 @@ export default class Badges extends Component {
     );
     const avatars = [avatar1, avatar2];
     const n = this.state.badges > 3 ? 2 : 1;
+    const avatarList = avatars.slice(0, n);
+
     return (
       <div>
         <div className="ListTitle">
           <h1> Your Badges </h1>
         </div>
         <h3>Your points : {this.state.badges}</h3>
-        <ul className="DashBoardList">
-          {avatars.slice(0, n)}
-        </ul>
+        <p>{avatarList}</p>
       </div>
     );
   }
