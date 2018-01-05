@@ -23,9 +23,7 @@ export default class PersonInfo extends Component {
         email: window.user,
       },
     }).then(({ data: user }) => {
-      console.log(user);
-      console.log('personInfo');
-      this.setState({ name: user.name, phone: user.phone });
+      this.setState({ name: user.name, phone: user.phone })
     });
   }
 

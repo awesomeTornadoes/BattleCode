@@ -44,11 +44,7 @@ io.on('connection', (socket) => {
   socket.on('room', (data) => {
     console.log('in joining room in SERVER', data);
     const room = 'alpha';
-    // socket.join(room)
     socket.emit('new user join', ['user']);
-    // setTimeout(() => {
-    //   socket.in('alpha').emit('new user join', data.user)
-    // }, 2000);
   });
 });
 
