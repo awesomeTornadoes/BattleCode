@@ -5,6 +5,7 @@ import {
   Drawer,
   Badge,
 } from 'material-ui';
+import PropTypes from 'prop-types';
 import MenuIcon from 'material-ui-icons/Menu';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -56,7 +57,7 @@ export default class NavBar extends Component {
     this.setState({ open: !this.state.open });
   }
   render() {
-    const menuItems = this.state.duels.filter(duel => !duel.complete).map((duel, i) => (
+    const menuItems = this.state.duels.filter(duel => !duel.complete).map(duel => (
       <MenuItem
         key={duel._id}
         containerElement={<Link to={`/competition/?id=${duel.challenge}&duel=${duel._id}`} />}
@@ -69,7 +70,7 @@ export default class NavBar extends Component {
         backgroundColor={purple500}
         size={50}
       >
-        {window.user.slice(0, 1).toUpperCase()}
+        {this.props.userName.slice(0, 1).toUpperCase()}
       </Avatar>
     );
     return (
@@ -100,3 +101,8 @@ export default class NavBar extends Component {
     );
   }
 }
+
+NavBar.propTypes = {
+  user: PropTypes.string.isRequired,
+  userName: PropTypes.string.isRequired,
+};

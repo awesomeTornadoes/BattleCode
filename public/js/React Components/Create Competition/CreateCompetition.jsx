@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { AppBar, Card, CardText, FontIcon, MuiThemeProvider, RaisedButton, TextField } from 'material-ui';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PreviewTest from './PreviewTest';
@@ -148,5 +149,3 @@ export default class CreateCompetition extends Component {
     );
   }
 }
-
-// <Difficulty points={Object.keys(this.state.tests).length + 1} />
