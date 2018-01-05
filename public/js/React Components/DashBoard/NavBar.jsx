@@ -70,7 +70,7 @@ export default class NavBar extends Component {
         backgroundColor={purple500}
         size={50}
       >
-        {this.props.userName.slice(0, 1).toUpperCase()}
+        {this.props.userName ? this.props.userName.slice(0, 1).toUpperCase() : this.props.user.slice(0, 1).toUpperCase()}
       </Avatar>
     );
     return (

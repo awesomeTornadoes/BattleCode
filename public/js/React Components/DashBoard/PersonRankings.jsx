@@ -28,7 +28,9 @@ export default class PersonRankings extends Component {
               _id: game.challenge,
             },
           }).then(({ data: gameName }) => {
-            this.setState({ GameList: this.state.GameList.concat([[gameName.name, prettyMs(game.time, { verbose: true })]]) });
+            if (game.time !== undefined) {
+              this.setState({ GameList: this.state.GameList.concat([[gameName.name, prettyMs(game.time, { verbose: true })]]) });
+            }
           });
         });
       });
