@@ -71,7 +71,7 @@ export default class PersonRankings extends Component {
     return (
       <div className="DashBoardThird">
         <div className="ListTitle">
-          <h1> Your Challenge History </h1>
+          <h1> Your Past Challenges </h1>
         </div>
         <h4>Personal records:</h4>
         <ul className="DashBoardList">

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import RaisedButton from 'material-ui/RaisedButton';
 
 export default class Friends extends Component {
   constructor(props) {
@@ -69,18 +70,19 @@ export default class Friends extends Component {
         .then(res => console.log(res));
     });
   }
-
   render() {
     let FriendsList;
     if (this.state.FriendsList[0]) {
       FriendsList = this.state.FriendsList.map((e, i) => (
         <li key={e[i]} className="FriendsList">
           <h4>{e}</h4>
-          <button
+          <RaisedButton
+            backgroundColor="#4FB5DB"
+            buttonStyle={{ color: 'white' }}
             value={e}
             onClick={this.sendChallenge && this.sendText}
-            className="btn btn-info btn-sm"
-          >Challenge {e}!</button>
+            className="friendButton"
+          >Challenge {e}!</RaisedButton>
         </li>
       ));
     }
@@ -99,12 +101,14 @@ export default class Friends extends Component {
               onChange={this.handleInput}
               className="form-control"
             />
-            <button
+            <RaisedButton
               onClick={this.addFriend}
-              className="btn btn-info btn-sm"
+              backgroundColor="#4FB5DB"
+              buttonStyle={{ color: 'white' }}
+              className="friendButton"
               type="submit"
               value="Submit"
-            >Add friend</button>
+            >Add friend</RaisedButton>
           </form>
         </div>
         <ul className="DashBoardList">
