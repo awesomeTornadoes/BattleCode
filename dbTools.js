@@ -251,7 +251,7 @@ exports.createDuel = (req, res) => {
       const duel = new Duel({ challenger, challenged, challenge, complete: false });
       duel.save()
         .then(() => {
-          pusher.trigger(challenged, 'duel-event', { message: `You've been challenged by ${challenger}` });
+          pusher.trigger(challenged, 'duel-event', { message: `You've been challenged by ${challenger}!` });
           res.status(201).send(duel);
         })
         .catch(err => res.status(500).send(err));
@@ -278,12 +278,12 @@ exports.updateDuel = (req, res) => {
       }
       if (email === duel.challenged) {
         duel.challengedTime = time;
+        duel.complete = true;
       }
       if (duel.challengerTime && duel.challengedTime) {
         duel.winner = duel.challengerTime < duel.challengedTime ? duel.challenger : duel.challenged;
-        duel.complete = true;
-        // pusher.trigger(challenged, 'duel-complete', { message: `Your challenge with ${challenger} is complete! The winner is ${duel.winner}` });
-        // pusher.trigger(challenger, 'duel-complete', { message: `Your challenge with ${challenged} is complete! The winner is ${duel.winner}` });
+        pusher.trigger(duel.challenged, 'duel-complete', { message: `Your challenge with ${duel.challenger} is complete! The winner is ${duel.winner}` });
+        pusher.trigger(duel.challenger, 'duel-complete', { message: `Your challenge with ${duel.challenged} is complete! The winner is ${duel.winner}` });
       }
       duel.save();
       res.status(204).send(duel);

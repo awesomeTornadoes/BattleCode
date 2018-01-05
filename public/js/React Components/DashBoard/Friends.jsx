@@ -77,11 +77,11 @@ export default class Friends extends Component {
     if (this.state.FriendsList[0]) {
       FriendsList = this.state.FriendsList.map((e, i) => (
         <li key={e[i]} className="FriendsList">
-          <p>{e}</p>
+          <h4>{e}</h4>
           <button
             value={e}
             onClick={this.sendChallenge}
-            className="btn btn-primary"
+            className="btn btn-info btn-sm"
           >Challenge {e}!</button>
           <button
             value={e}
@@ -104,10 +104,11 @@ export default class Friends extends Component {
               placeholder="example@gmail.com"
               value={this.state.friendInput}
               onChange={this.handleInput}
+              className="form-control"
             />
             <button
               onClick={this.addFriend}
-              className="btn btn-primary"
+              className="btn btn-info btn-sm"
               type="submit"
               value="Submit"
             >Add friend</button>
