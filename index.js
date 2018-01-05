@@ -60,8 +60,8 @@ app.post('/signin', (req, res) => {
 });
 
 app.post('/text', (req, res) => {
-  const { user } = req.body;
-  notifyOnChallenge(user);
+  const { user, phone } = req.body;
+  notifyOnChallenge(user, phone);
   res.send(user);
 });
 

@@ -5,6 +5,7 @@ function formatMessage(challenger) {
 }
 
 exports.notifyOnChallenge = (challenger, phone) => {
+  const phoneNb = phone.toString();
   const messageToSend = formatMessage(challenger);
-  twilioClient.sendSms('+15043430627', messageToSend);
+  twilioClient.sendSms(`+1${phoneNb}`, messageToSend);
 };

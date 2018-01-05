@@ -66,7 +66,7 @@ export default class PersonInfo extends Component {
           <Divider />
         </Paper>
         <br />
-        <RaisedButton label="UPDATE" style={style} onClick={this.handleSubmit} />
+        <RaisedButton secondary label="UPDATE" style={style} onClick={this.handleSubmit} />
         <br />
       </div>
     );
