@@ -60,12 +60,15 @@ export default class Friends extends Component {
   }
 
   sendText(event) {
+    const challengee = event.target.value;
+    console.log(challengee);
     axios.get('/findUserByEmail', {
       params: {
-        email: this.props.user,
+        email: challengee,
       },
     }).then(({ data: user }) => {
-      axios.post('/text', { user: window.user.slice(0, window.user.indexOf('@')), phone: user.phone })
+      console.log(user.phone)
+      axios.post('/text', { user: this.props.user.slice(0, window.user.indexOf('@')), phone: user.phone })
         .then(res => console.log(res));
     });
   }
