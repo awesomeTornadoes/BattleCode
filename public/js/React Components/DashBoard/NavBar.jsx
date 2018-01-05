@@ -70,7 +70,7 @@ export default class NavBar extends Component {
         backgroundColor={purple500}
         size={50}
       >
-        {window.user.slice(0, 1).toUpperCase()}
+        {this.props.userName.slice(0, 1).toUpperCase()}
       </Avatar>
     );
     return (
@@ -104,4 +104,5 @@ export default class NavBar extends Component {
 
 NavBar.propTypes = {
   user: PropTypes.string.isRequired,
+  userName: PropTypes.string.isRequired,
 };

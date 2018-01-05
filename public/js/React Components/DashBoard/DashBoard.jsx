@@ -39,7 +39,7 @@ export default class DashBoard extends Component {
     return (
       <MuiThemeProvider >
         <div className="Dashboard">
-          <NavBar user={this.props.user} />
+          <NavBar user={this.props.user} userName={this.state.userName} />
           <Card>
             <div>
               <CompetitionSelect />
