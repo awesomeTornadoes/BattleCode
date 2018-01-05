@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { blue300 } from 'material-ui/styles/colors';
-import { red300 } from 'material-ui/styles/colors';
+import { blue300, red300, white } from 'material-ui/styles/colors';
 import Avatar from 'material-ui/Avatar';
-import { white } from 'material-ui/styles/colors';
 import axios from 'axios';
 
 export default class Badges extends Component {
