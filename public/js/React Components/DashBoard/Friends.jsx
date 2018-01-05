@@ -14,7 +14,6 @@ export default class Friends extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.addFriend = this.addFriend.bind(this);
     this.sendChallenge = this.sendChallenge.bind(this);
-    this.sendText = this.sendText.bind(this);
   }
   componentWillMount() {
     axios.get('/getFriends', { headers: { user: this.props.user } })
@@ -58,8 +57,6 @@ export default class Friends extends Component {
         window.location.hash = `/competition/?id=${response.data.challenge}&duel=${response.data._id}`;
       })
       .catch(err => console.error(err));
-  }
-  sendText(event) {
     axios.get('/findUserByEmail', {
       params: {
         email: this.props.user,
@@ -77,7 +74,7 @@ export default class Friends extends Component {
           <h4>{e}</h4>
           <button
             value={e}
-            onClick={this.sendChallenge && this.sendText}
+            onClick={this.sendChallenge}
             className="btn btn-primary"
           >Challenge {e}!</button>
         </li>
