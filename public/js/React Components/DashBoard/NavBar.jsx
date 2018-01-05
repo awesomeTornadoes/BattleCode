@@ -58,14 +58,17 @@ export default class NavBar extends Component {
         primaryText={duel.challenger}
       />
     ));
-    console.log(menuItems);
     return (
       <div>
         <AppBar
           onLeftIconButtonTouchTap={() => this.toggleDrawer()}
           title="Battle Code"
           style={{ backgroundColor: '#4FB5DB' }}
-          iconElementLeft={<Badge badgeContent={this.state.duels.length}><MenuIcon style={{ color: 'white', cursor: 'pointer' }} /></Badge>}
+          iconElementLeft={
+            this.state.duels.length ?
+              <Badge badgeContent={this.state.duels.length}><MenuIcon style={{ color: 'white', cursor: 'pointer' }} /></Badge> :
+              <MenuIcon style={{ color: 'white', cursor: 'pointer' }} />
+          }
         />
         <Drawer
           docked={false}
