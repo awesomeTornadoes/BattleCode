@@ -47,7 +47,7 @@ export default class DashBoard extends Component {
                 <RaisedButton fullWidth label="Create A Challenge" />
               </Link>
               <div style={{ textAlign: 'center' }}>
-                <h1>Welcome {this.state.userName}!</h1>
+                <h1>Welcome {this.state.userName ? this.state.userName : this.props.user}!</h1>
               </div>
               <div className="DashBoardFlex">
                 <PersonInfo />

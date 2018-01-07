@@ -70,7 +70,7 @@ export default class NavBar extends Component {
         backgroundColor={purple500}
         size={50}
       >
-        {this.props.userName.slice(0, 1).toUpperCase()}
+        {this.props.userName ? this.props.userName.slice(0, 1).toUpperCase() : this.props.user.slice(0, 1).toUpperCase()}
       </Avatar>
     );
     return (
@@ -80,8 +80,8 @@ export default class NavBar extends Component {
           title="Battle Code"
           style={{ backgroundColor: '#4FB5DB' }}
           iconElementLeft={
-            this.state.duels.length ?
-              <Badge secondary badgeContent={this.state.duels.length}>
+            menuItems.length ?
+              <Badge secondary badgeContent={menuItems.length}>
                 <MenuIcon style={{ color: 'white', cursor: 'pointer' }} />
               </Badge>
               :

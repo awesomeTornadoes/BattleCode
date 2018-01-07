@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import RaisedButton from 'material-ui/RaisedButton';
 
 export default class Friends extends Component {
   constructor(props) {
@@ -13,7 +14,6 @@ export default class Friends extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.addFriend = this.addFriend.bind(this);
     this.sendChallenge = this.sendChallenge.bind(this);
-    this.sendText = this.sendText.bind(this);
   }
   componentWillMount() {
     axios.get('/getFriends', { headers: { user: this.props.user } })
@@ -48,6 +48,7 @@ export default class Friends extends Component {
   }
   sendChallenge(event) {
     const challenger = this.props.user;
+    console.log(event.target);
     axios.post('/duel', {
       challenger,
       challenged: event.target.value,
@@ -56,23 +57,15 @@ export default class Friends extends Component {
         window.location.hash = `/competition/?id=${response.data.challenge}&duel=${response.data._id}`;
       })
       .catch(err => console.error(err));
-    return true;
-  }
-
-  sendText(event) {
-    const challengee = event.target.value;
-    console.log(challengee);
     axios.get('/findUserByEmail', {
       params: {
         email: challengee,
       },
     }).then(({ data: user }) => {
-      console.log(user.phone)
-      axios.post('/text', { user: this.props.user.slice(0, window.user.indexOf('@')), phone: user.phone })
+      axios.post('/text', { user: window.user.slice(0, window.user.indexOf('@')), phone: '5043430627' })
         .then(res => console.log(res));
     });
   }
-
   render() {
     let FriendsList;
     if (this.state.FriendsList[0]) {
@@ -81,8 +74,8 @@ export default class Friends extends Component {
           <h4>{e}</h4>
           <button
             value={e}
-            onClick={this.sendChallenge && this.sendText}
-            className="btn btn-info btn-sm"
+            onClick={this.sendChallenge}
+            className="btn btn-primary"
           >Challenge {e}!</button>
         </li>
       ));
@@ -104,7 +97,7 @@ export default class Friends extends Component {
             />
             <button
               onClick={this.addFriend}
-              className="btn btn-info btn-sm"
+              className="btn btn-primary"
               type="submit"
               value="Submit"
             >Add friend</button>

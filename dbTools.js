@@ -157,7 +157,6 @@ exports.updateInfo = (req, res) => {
 };
 
 exports.findUserByEmail = (req, res) => {
-  console.log(req);
   User.findOne(req.query).exec((err, success) => {
     if (err) {
       res.send(err);
