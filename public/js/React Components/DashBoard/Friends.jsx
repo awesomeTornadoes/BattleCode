@@ -28,6 +28,7 @@ export default class Friends extends Component {
           this.setState({ FriendsList });
         }
       });
+
   }
   handleInput(event) {
     this.setState({ friendInput: event.target.value });
@@ -45,6 +46,8 @@ export default class Friends extends Component {
             }
           });
       });
+
+
   }
   sendChallenge(event) {
     const challenger = this.props.user;
