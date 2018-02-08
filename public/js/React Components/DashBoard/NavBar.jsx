@@ -40,6 +40,7 @@ export default class NavBar extends Component {
     });
 
     const channel = pusher.subscribe(window.user);
+    console.log(channel);
 
     channel.bind('duel-event', (data) => {
       alert(data.message);
