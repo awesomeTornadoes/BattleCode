@@ -8,7 +8,6 @@ export default class Badges extends Component {
     super();
     this.state = {
       badges: '',
-      n: '',
     };
   }
 
@@ -25,7 +24,6 @@ export default class Badges extends Component {
       }).then(({ data: games }) => {
         this.setState({
           badges: games.length * 4,
-          n: this.state.badges > 3 ? 2 : 1,
         });
       });
     });
@@ -53,7 +51,7 @@ export default class Badges extends Component {
       </Avatar>
     );
     const avatars = [avatar1, avatar2];
-    const n = this.state.badges > 3 ? 2 : 1;
+    const n = this.state.badges / 4 > 3 ? 2 : 1;
     const avatarList = avatars.slice(0, n);
 
     return (

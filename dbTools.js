@@ -216,6 +216,8 @@ exports.getUserGame = (req, res) => {
 
 exports.addFriend = (req, res) => {
   const { userEmail, friend } = req.body;
+  pusher.trigger(friend, 'friend-event', { message: `${userEmail} wants to add you as a friend`, n: 1 });
+
   User.findOne({ email: friend })
     .then((newFriend) => {
       const friendId = newFriend.username;

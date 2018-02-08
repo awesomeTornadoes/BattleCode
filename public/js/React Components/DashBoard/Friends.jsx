@@ -28,6 +28,7 @@ export default class Friends extends Component {
           this.setState({ FriendsList });
         }
       });
+
   }
   handleInput(event) {
     this.setState({ friendInput: event.target.value });
@@ -45,6 +46,8 @@ export default class Friends extends Component {
             }
           });
       });
+
+
   }
   sendChallenge(event) {
     const challenger = this.props.user;
@@ -59,7 +62,7 @@ export default class Friends extends Component {
       .catch(err => console.error(err));
     axios.get('/findUserByEmail', {
       params: {
-        email: this.props.user,
+        email: challengee,
       },
     }).then(({ data: user }) => {
       axios.post('/text', { user: window.user.slice(0, window.user.indexOf('@')), phone: '5043430627' })

@@ -4,9 +4,8 @@ Test your coding skillz against anyone. Then create new challenges for others to
 
 ## Team
 
-  - __Product Owner__: Marina Mcgrath (Middleend)
-  - __Scrum Master__: Cain Watson (Frontend)
-  - __Lead Engineer__: Jacques Metevier (Backend)
+  - __Product Owner__: Preston Winstead 
+  - __Lead Engineer__: Lily Lebec 
 
 ## Table of Contents
 
@@ -24,10 +23,6 @@ Test your coding skillz against anyone. Then create new challenges for others to
 BattleCodes lets you solve programming challenges in a race against friends. The first to write code that passes all of the tests wins! Earn badges for special achievements like the Ali One Liner Badge!
 
 ## <a name="wireframe"></a>App Wireframe
-![final-wireframe](images/wireframe.png)
-
-## <a name="live-app-wireframe"></a>Live App Wireframe
-[interactive-wireframe](https://xd.adobe.com/view/407b6c5e-4ed5-4fb0-9813-62705bd79b63/)
 
 ## <a name="Database"></a>Database
 ![database](images/db.png)
@@ -37,7 +32,6 @@ BattleCodes lets you solve programming challenges in a race against friends. The
 
 ## <a name="development"></a>Development
 Setting up a development environment requires global installations of node
-
 
 ### <a name="system-requirements"></a>1. System Requirements
 
