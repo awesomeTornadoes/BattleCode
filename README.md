@@ -25,8 +25,8 @@ Test your coding skills against anyone. Then create new challenges for others to
 >Create custom challenges and challenge your friends to a battle to prove your dominance. Just don't sink beneath the pressure of the timer!
 
 ## <a name="wireframe"></a>App Wireframe
-<img src="BattleCode1.PNG" height="200" width="300">
-<img src="BattleCode2.PNG" height="200" width="300">
+<img src="BattleCode1.PNG" height="300" width="450">
+<img src="BattleCode2.PNG" height="300" width="450">
 
 ## <a name="Database"></a>Database
 ![database](images/db.png)
