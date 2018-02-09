@@ -1,6 +1,6 @@
 # BattleCode
 
-Test your coding skillz against anyone. Then create new challenges for others to test themselves against!
+Test your coding skills against anyone. Then create new challenges for others to test themselves against!
 
 ## Team
 
@@ -19,10 +19,14 @@ Test your coding skillz against anyone. Then create new challenges for others to
 
 ## <a name="how-it-works"></a>How it Works
 
-> Bringing fast paced fun to coding.
-BattleCodes lets you solve programming challenges in a race against friends. The first to write code that passes all of the tests wins! Earn badges for special achievements like the Ali One Liner Badge!
+>Bringing fast paced fun to coding.
+>BattleCodes lets you solve programming challenges in a race against friends. 
+>Want to prove that you're the best coder among your friends? Now you can! 
+>Create custom challenges and challenge your friends to a battle to prove your dominance. Just don't sink beneath the pressure of the timer!
 
 ## <a name="wireframe"></a>App Wireframe
+<img src="BattleCode1.PNG" height="200" width="300">
+<img src="BattleCode2.PNG" height="200" width="300">
 
 ## <a name="Database"></a>Database
 ![database](images/db.png)
